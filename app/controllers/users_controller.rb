@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user,  only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_filter :signed_in_user,  only: [:index, :edit, :update]
   before_filter :correct_user,    only: [:edit, :update]
   before_filter :admin_user,      only: :destroy
 
@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
 	def show
   	@user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
 	end
 
 	def new
@@ -46,21 +45,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def following
-    @title  = "Following"
-    @user   = User.find(params[:id])
-    @users  = @user.followed_users.paginate(page: params[:page])
-    render 'show_follow'
-  end
-
-  def followers
-    @title  = "Followers"
-    @user   = User.find(params[:id])
-    @users  = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
-  end
-
   private
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
 
     def correct_user
       @user = User.find(params[:id])
