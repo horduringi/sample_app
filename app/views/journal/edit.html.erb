@@ -1,0 +1,12 @@
+<% provide(:title, "Medical abstraction form") %> 
+<h1>Medical abstraction form <%= @journal.studynumber %></h1>
+<div class="row">
+  <div class="span6 offset3">  
+  <%= form_for(@journal) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

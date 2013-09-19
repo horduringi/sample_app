@@ -1,12 +1,23 @@
 SampleApp::Application.routes.draw do
+  get "journal/new"
+
+
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :journal
 
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
+  
+  match '/form/setcountry', to: 'form#setcountry', via: 'put'
+
+  match '/form/get_journals', to: 'form#get_journals', via: 'get'
+  match '/form/:id(:format)', to: 'form#show', via: 'get'
+
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

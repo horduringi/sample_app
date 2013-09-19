@@ -1,0 +1,107 @@
+<% provide(:title, "Medical abstraction form") %> 
+<div class="row-fluid">
+  <p style="text-align:left; color:red; font-size:1.2em; padding-top:10px">ALiCCS - Adult Life after Childhood Cancer in Scandinavia</p>
+</div>
+<div class="row-fluid">
+  <div class="span7">
+    <h1 style="text-align:left">Medical abstraction form</h1>
+  </div>
+  <div class="span5">
+    <br>
+    <p class="infoSmall">Danish Cancer Society Research Center<br>
+      Strandboulevarden 49, 2100 Copenhagen, DK<br>
+      <b>Contact:</b><br>
+      Thorgerdur Gudmundsdottir, thorgud@cancer.dk, +45 35257648<br>
+      Thomas Wiebe, thomas.wiebe@skane.se, +46 46178284</p>
+  </div>
+</div>
+<br><br>
+ 
+ <%= form_for(@journal) do |j| %>
+<div class="row-fluid">
+  <div class="span3">     
+      <p>Country:</p>
+  </div>
+  <div class="span2">
+      <%= j.select :country, options_from_collection_for_select(Country.all, :id, :country_combo, @journal.country) %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">     
+      <p><b>Patient ALiCCS-study no.:</b></p>
+  </div>
+  <div class="span2">
+      <%= @journal.studynumber %>
+  </div>
+</div>
+<br>
+<div class="row-fluid">
+  <div class="span3">     
+      <p>Gender:</p>
+  </div>
+  <div class="span2">
+      <%= j.select :gender, options_from_collection_for_select(Gender.all, :id, :gender_combo, @journal.gender) %>
+  </div>
+</div>
+<br>
+<div class="row-fluid">
+  <div class="span3">
+    <p>Comments:</p>
+  </div>
+  <div class="span9">
+    <%= j.text_area :comments, :cols => "30", :rows => "7" %> 
+  </div>     
+</div>
+<br>
+      <p>Any missing information concerning different aspects of the childhood cancer treatment?</p>
+<div class="row-fluid">
+  <div class="span3"> 
+    <p>Chemotherapy?</p>
+  </div>
+  <div class="span5"> 
+      <%= j.select :missinginfochemo, options_from_collection_for_select(MissingInfo.all, :id, :missingInfo_combo, @journal.missinginfochemo) %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Radiotherapy?</p>
+  </div>
+  <div class="span5"> 
+      <%= j.select :missinginforadio, options_from_collection_for_select(MissingInfo.all, :id, :missingInfo_combo, @journal.missinginfochemo) %>     
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Surgery?</p>
+  </div>
+  <div class="span5"> 
+      <%= j.select :missinginfosurgery, options_from_collection_for_select(MissingInfo.all, :id,:missingInfo_combo, @journal.missinginfochemo) %>
+  </div>
+</div>
+<br>
+<div class="row-fluid">
+  <div class="span4">
+    <p>Data extraction accomplished by:</p>
+  </div>
+  <div class="span8">
+    <p>Thorgerdur Gudmundsdottir, Kræftens Bekæmpelse</p>
+  </div>
+</div>
+<br>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Radiotherapy records copied**:</p>
+  </div>
+  <div class="span6">
+      <%= j.date_select :radiorecordscopied, :start_year => 1970, :end_year => Time.now.year, :default => @journal.radiorecordscopied, :include_blank=> false, order: [:day, :month, :year] %>
+  </div>
+  <div class="span7 offset3">
+      <p class="infoSmall">**copied WITHOUT any personal identifications. Leave empty if not relevant.</p>
+  </div>
+</div>
+<br>
+<br>
+<div align="center">
+      <%= j.submit "Save changes", class: "btn btn-large btn-primary" %>
+</div>
+    <% end %>
