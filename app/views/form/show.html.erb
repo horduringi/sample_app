@@ -93,7 +93,7 @@
       <p>Radiotherapy records copied**:</p>
   </div>
   <div class="span6">
-      <%= j.date_select :radiorecordscopied, :start_year => 1970, :end_year => Time.now.year, :default => @journal.radiorecordscopied, :include_blank=> false, order: [:day, :month, :year] %>
+      <%= j.date_select :radiorecordscopied, :start_year => 2013, :end_year => Time.now.year, :default => @journal.radiorecordscopied, :include_blank=> true, order: [:day, :month, :year] %>
   </div>
   <div class="span7 offset3">
       <p class="infoSmall">**copied WITHOUT any personal identifications. Leave empty if not relevant.</p>
@@ -101,6 +101,292 @@
 </div>
 <br>
 <br>
+<h2>Before the childhood cancer diagnosis</h2>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Chronic diseases of importance before cancer diagnosis*:</p>
+  </div>
+  <div class="span5">
+      <%= j.select :chronicdisease, options_from_collection_for_select(ChronicDisease.all, :id,:chronicdisease_combo, @journal.chronicdisease) %>
+  </div>
+  <div class="span4">
+    <p class="infoSmall">*See instructions for examples</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, please specify*:
+  </div>
+  <div class="span9">
+      <%= j.text_area :chronicdiseasespec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Chromosomal disorder:</p>
+  </div>
+  <div class="span5">
+      <%= j.select :chromosomaldisorder, options_from_collection_for_select(ChromosomalDisorder.all, :id,:chromosomaldisorder_combo, @journal.chromosomaldisorder) %> 
+  </div>
+  <div class="span4">
+    <p class="infoSmall">*See instructions (and appendix III) for examples</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, other than Down's syndrome, please specify*:
+  </div>
+  <div class="span9">
+      <%= j.text_area :chromosomaldisorderspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Immune deficiency</p>
+  </div>
+  <div class="span2">
+      <%= j.select :immunedeficiency, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.immunedeficiency) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Congenital anomaly</p>
+  </div>
+  <div class="span2">
+      <%= j.select :congenitalanomaly, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.congenitalanomaly) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Neurofibromatosis</p>
+  </div>
+  <div class="span2">
+      <%= j.select :neurofibromatosis, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.neurofibromatosis) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Other familial cancer syndromes</p>
+  </div>
+  <div class="span2">
+      <%= j.select :otherfamilialcancersynd, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.otherfamilialcancersynd) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, please specify*:
+  </div>
+  <div class="span9">
+      <%= j.text_area :otherfamilialcancersyndspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4 offset3">
+    <p class="infoSmall">*See instructions for examples</p>
+  </div>
+</div>
+<br>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Cancer in the family, in a first-degree relative**</p>
+  </div>
+  <div class="span2">
+      <%= j.select :cancerinfamily, options_from_collection_for_select(NoYesUnknown.all, :id,:noyesunknown_combo, @journal.cancerinfamily) %> 
+  </div>
+  <div class="span7">
+    <p class="infoSmall">**First-degree relative = parents, siblings or possible offspring of the childhood cancer patient.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, please specify both relation, and type of cancer:
+  </div>
+  <div class="span9">
+      <%= j.text_area :cancerinfamilyspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Previous surgical procedures</p>
+  </div>
+  <div class="span2">
+      <%= j.select :prevsurgicalprocedures, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.prevsurgicalprocedures) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, please specify*:
+  </div>
+  <div class="span9">
+      <%= j.text_area :prevsurgicalproceduresspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4 offset3">
+    <p class="infoSmall">*See instructions for examples</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Previous radiation therapy</p>
+  </div>
+  <div class="span2">
+      <%= j.select :prevradtherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.prevradtherapy) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>If yes, specify (for what, when, where and dose):
+  </div>
+  <div class="span9">
+      <%= j.text_area :prevradtherapyspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<h1>First Primary Cancer</h1>
+<div class="row-fluid">
+  <div class="span3">     
+      <p><b>Diagnosis:</b></p><p class=infoSmall>(Please write the diagnosis as it is written in the medical record)</p>
+  </div>
+  <div class="span9">
+      <%= j.text_area :firstprimcancerdiagnosis, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Date of diagnosis:</p>
+  </div>
+  <div class="span6">
+      <%= j.date_select :dateofdiagnosis, :start_year => 1970, :end_year => Time.now.year, :default => @journal.dateofdiagnosis, :include_blank=> true, order: [:day, :month, :year] %>
+  </div>
+  <div class="span7 offset3">
+      <p class="infoSmall">Please see definition of the date of diagnosis in the instructions.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+      <p>Please fill out the corresponding number for the first primary cancer type:</p>
+  </div>
+  <div class="span6">
+    <br>
+      <%= j.select :firstprimcancertype, options_from_collection_for_select(FirstPrimCancerType.all, :id,:firstprimcancertype_combo, @journal.firstprimcancertype) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9">
+    <h2 style=margin-bottom:0px;margin-top:20px;>1. Leukemia</h2>
+  </div>
+  <div class="span9">
+    <p class=infoSmall>Please, only choose one option.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Subtype:</p>
+  </div>
+  <div class="span5">
+      <%= j.select :leukemiasubtype, options_from_collection_for_select(LeukemiaSubType.all, :id,:leukemiasubtype_combo, @journal.leukemiasubtype) %> 
+  </div>
+  <div class="span4">
+    <p class=infoSmall> ALL = Acute Lymphoblastic Leukemia<br>
+                        AML = Acute Myeloid Leukemia<br>
+                        MDS = Myelodysplastic disorder<br>
+                        CML = Chronic Myelocytic Leukemia<br>
+                        JMML = Juvenile Myelomonocytic Leukemia</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9">
+    <h2 style=margin-bottom:0px;margin-top:20px;>2. Hodgkin Lymphoma (HL, Hodgkin disease, HD)</h2>
+  </div>
+  <div class="span9">
+    <p class=infoSmall>Please, only choose one option.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Subtype:</p>
+  </div>
+  <div class="span5">
+      <%= j.select :hodgkinlymphomasubtype, options_from_collection_for_select(HodgkinLymphomaSubType.all, :id,:hodgkinlymphomasubtype_combo, @journal.hodgkinlymphomasubtype) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9 offset3"
+    <p class=infoSmall>*Other e.g. primary mediastinal lymphoma, follicular lymphoma, nodular marginal zone lymphoma, peripheral T-cell.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9">
+    <h2 style=margin-bottom:0px;margin-top:20px;>3. Non-Hodgkin Lymphoma (NHL)</h2>
+  </div>
+  <div class="span9">
+    <p class=infoSmall>Please, only choose one option.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Subtype:</p>
+  </div>
+  <div class="span8">
+      <%= j.select :nonhodgkinlymphomasubtype, options_from_collection_for_select(NonHodgkinLymphomaSubType.all, :id,:nonhodgkinlymphomasubtype_combo, @journal.nonhodgkinlymphomasubtype) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9 offset3"
+    <p class=infoSmall>*Other e.g. primary mediastinal lymphoma, follicular lymphoma, nodular marginal zone lymphoma, peripheral T-cell.</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9">
+    <h2 style=margin-bottom:0px;margin-top:20px;>4. CNS tumor</h2>
+  </div>
+  <div class="span9">
+    <p class=infoSmall>Please, only choose one option within each category (tumor type, site and laterality).</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Histological type:</p>
+  </div>
+  <div class="span6">
+      <%= j.select :cnstumorhistologicaltype, options_from_collection_for_select(CnsTumorHistologicalType.all, :id,:cnstumorhistologicaltype_combo, @journal.cnstumorhistologicaltype) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3">
+      <p>Primary tumor site:</p>
+  </div>
+  <div class="span6">
+      <%= j.select :cnstumorprimarytumorsite, options_from_collection_for_select(CnsTumorPrimaryTumorSite.all, :id,:cnstumorprimarytumorsite_combo, @journal.cnstumorprimarytumorsite) %> 
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span3 offset3">
+      <p>Please specify*:
+  </div>
+  <div class="span6">
+      <%= j.text_area :cnstumorprimarytumorsiteotherspec, :cols => "30", :rows => "7" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span9 offset3">
+    <p class=infoSmall style="color:red">Please note that <b>Germinomas</b> in the CNS are <b>listed in group 12</b> (Germ cell and other gonadal tumors)</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div align="center">
       <%= j.submit "Save changes", class: "btn btn-large btn-primary" %>
 </div>

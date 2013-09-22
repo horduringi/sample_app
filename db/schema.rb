@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130915151929) do
+ActiveRecord::Schema.define(:version => 20130921154824) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -70,12 +70,14 @@ ActiveRecord::Schema.define(:version => 20130915151929) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "chronic_diseases", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "cns_tumor_histological_types", :force => true do |t|
@@ -157,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20130915151929) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "institutes", :force => true do |t|
@@ -379,12 +382,14 @@ ActiveRecord::Schema.define(:version => 20130915151929) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "non_hodgkin_lymphoma_sub_types", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "other_primary_tumor_sites", :force => true do |t|
