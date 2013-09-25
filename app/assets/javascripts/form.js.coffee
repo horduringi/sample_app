@@ -6,14 +6,5 @@
 #app.controller "FormCtrl", ($scope) ->
 #  $scope.country = ->
 #    alert "jei"
-app = angular.module("formApp", ["ngGrid"])
-app.controller "FormController", ($scope) ->
-  $scope.selectcountry = (c) ->
-    $.ajax 
-      url: "/form/setcountry"
-      data:
-        countryid:
-          parseInt(c.country)
-      type: "PUT"
-      success:
-        alert "jei"
+app = angular.module("formApp",[])
+app.controller "FormCtrl", ($scope) ->

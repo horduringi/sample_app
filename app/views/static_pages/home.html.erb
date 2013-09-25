@@ -1,7 +1,8 @@
 
   <% if signed_in? %>
-<h2>Select an ALiCCS-study number</h2>
-<div class="row" ng-controller="MyCtrl" ng-app="myApp">
+<h2 style="text-align:center">Select an ALiCCS-study number</h2>
+<div ng-controller="MyCtrl" ng-app="myApp" align="center">
+  <input align="center" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText" style="width:200px;"/>
  <div class="gridStyle" ng-grid="gridOptions"></div>
 </div>
   <% else %>

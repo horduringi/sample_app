@@ -3,11 +3,18 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 app = angular.module("myApp", ["ngGrid"])
 app.controller "MyCtrl", ($scope) ->
-  $scope.myData = JSON.parse($.ajax(
+  sortByKey = (array, key) ->
+    array.sort (a, b) ->
+      x = a[key]
+      y = b[key]
+      (if (x < y) then -1 else ((if (x > y) then 1 else 0)))
+  $scope.filterOptions = filterText: ''
+  $scope.myData = sortByKey(JSON.parse($.ajax(
     type: "GET"
     url: "/form/get_journals"
     async: false
-  ).responseText)
+  ).responseText), "studynumber")
   $scope.gridOptions = 
     data: "myData"
-    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="form/{{row.getProperty(col.field)}}/">{{row.getProperty(col.field)}}</a></span></div>'}]
+    filterOptions: $scope.filterOptions
+    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="form/{{row.getProperty(\'id\')}}/">{{row.getProperty(col.field)}}</a></span></div>'}]
