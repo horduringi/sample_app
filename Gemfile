@@ -7,8 +7,7 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 
-gem "angular-gem"
-gem "angular-ng-grid-rails"
+gem 'awesome_print'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.5'
@@ -18,6 +17,8 @@ end
 group :development do
 	gem 'annotate', '2.5.0'
 end
+
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,6 +39,8 @@ group :production do
 	gem 'pg', '0.12.2'
   gem 'rails_12factor'
 end
+
+gem "gon"
 
 
 ruby '2.0.0'

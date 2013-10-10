@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921154824) do
+ActiveRecord::Schema.define(:version => 20131010221338) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "chemo_or_bone_marrows", :force => true do |t|
@@ -153,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "hodgkin_lymphoma_sub_types", :force => true do |t|
@@ -253,34 +255,13 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.integer  "externalbeamradiotherapy"
     t.date     "externalbeamradiotherapydateofstart"
     t.date     "externalbeamradiotherapydateofcompletion"
-    t.float    "radio1targetvol1"
     t.float    "radio1targed1dose"
-    t.integer  "radio1nooffractions"
-    t.float    "radio2targetvol2"
     t.float    "radio2targed2dose"
-    t.integer  "radio2nooffractions"
-    t.float    "radio3targetvol3"
     t.float    "radio3targed3dose"
-    t.integer  "radio3nooffractions"
-    t.integer  "radiationquality"
-    t.integer  "ovarianpinning"
-    t.integer  "shieldingoforgans"
-    t.integer  "shieldingoforgansspec"
-    t.string   "shieldingoforgansspecother"
     t.integer  "brachytherapy"
-    t.string   "typeofbrachytherapy"
-    t.integer  "typeofbrachytherapycode"
-    t.string   "typeofbrachytherapycodespec"
-    t.integer  "brachytherapytargetvolume"
-    t.float    "brachytherapydose"
     t.date     "brachytherapydateofstart"
     t.date     "brachytherapydateofcompletion"
-    t.integer  "internalradiotherapyradioactiveagent"
-    t.string   "internalradiotherapyradioactiveagentspec"
     t.date     "internalradiotherapydateofstart"
-    t.float    "internalradiotherapytotaldose"
-    t.integer  "internalradiotherapydosage"
-    t.integer  "radiotherapyrecordscopied"
     t.integer  "surgery"
     t.integer  "chemotherapy"
     t.date     "chemotherapydateinitiation"
@@ -301,6 +282,15 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.integer  "numberofbonemarrowtransplantations"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
+    t.string   "malignantbonetumortypeotherspec"
+    t.string   "germcelltumorsandgonadalstumorstypeotherspec"
+    t.string   "externalbeamradiotherapytreatinghospital"
+    t.string   "brachytherapytreatinghospital"
+    t.string   "internalradiotherapytreatinghospital"
+    t.date     "externalbeamradiotherapyrecordscopied"
+    t.date     "brachytherapyrecordscopied"
+    t.date     "internalradiotherapyrecordscopied"
+    t.integer  "internalradiotherapy"
   end
 
   create_table "last_doctors_visit_statuses", :force => true do |t|
@@ -313,24 +303,28 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "laterality_rlbmus", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "laterality_rlbns", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "laterality_rlbus", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "leukemia_sub_types", :force => true do |t|
@@ -349,6 +343,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "missing_infos", :force => true do |t|
@@ -363,6 +358,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "no_yes", :force => true do |t|
@@ -376,6 +372,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "no_yes_unknowns", :force => true do |t|
@@ -402,6 +399,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "radiation_qualities", :force => true do |t|
@@ -420,6 +418,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "shielding_of_organs_specs", :force => true do |t|
@@ -438,6 +437,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "sources", :force => true do |t|
@@ -480,6 +480,7 @@ ActiveRecord::Schema.define(:version => 20130921154824) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "type_of_brachytherapy_codes", :force => true do |t|

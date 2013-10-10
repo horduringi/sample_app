@@ -65,6 +65,35 @@ p {
   font-size: 0.9em;
 }
 
+.infoSmallRed {
+  font-size: 1em;
+  color: red;
+}
+
+.infoBox {
+  font-size: 0.9em;
+  border-style: solid;
+  border-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.infoBoxRed {
+  font-size: 0.9em;
+  border-style: solid;
+  border-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-color:red;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 /* header */
 

@@ -6,5 +6,8 @@
 #app.controller "FormCtrl", ($scope) ->
 #  $scope.country = ->
 #    alert "jei"
+
 app = angular.module("formApp",[])
 app.controller "FormCtrl", ($scope) ->
+  $scope.journal = gon.journal
+  

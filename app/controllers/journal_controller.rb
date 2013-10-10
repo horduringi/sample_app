@@ -2,6 +2,7 @@ class JournalController < ApplicationController
 
   def update
     @journal = Journal.find(params[:id])
+    gon.journal = @journal
     if @journal.update_attributes(params[:journal])
       flash[:success] = "Medical abstraction form updated"
     else
