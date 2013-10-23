@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010221338) do
+ActiveRecord::Schema.define(:version => 20131022225106) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "bone_marrow_transplantations", :force => true do |t|
-    t.integer  "recordid"
+    t.integer  "journal_id"
     t.integer  "transplantationnumber"
     t.date     "transplantationdate"
     t.integer  "autologous"
@@ -57,14 +58,15 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
   end
 
   create_table "chemo_therapies", :force => true do |t|
-    t.integer  "recordid"
+    t.integer  "journal_id"
     t.integer  "yearnumber"
-    t.date     "measurementdata"
+    t.date     "measurementdate"
     t.float    "bodysurface"
     t.float    "weight"
     t.float    "height"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "estimated"
   end
 
   create_table "chromosomal_disorders", :force => true do |t|
@@ -102,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
 
   create_table "cytostatic_drug_givens", :force => true do |t|
     t.integer  "cytostaticdrugid"
-    t.integer  "recordid"
+    t.integer  "journal_id"
     t.integer  "chemoorbonemarrow"
     t.float    "totalcumulateddosemg"
     t.float    "totalcumulateddoseunits"
@@ -110,20 +112,16 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.integer  "anthracyclinesbolusinfnoyes"
     t.integer  "anthracyclinesbolusinf"
     t.integer  "cardioprotectants"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-  end
-
-  create_table "cytostatic_drugs", :force => true do |t|
-    t.string   "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "bone_marrow_transplantation_id"
   end
 
   create_table "donors", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "dose_qualities", :force => true do |t|
@@ -291,12 +289,14 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.date     "brachytherapyrecordscopied"
     t.date     "internalradiotherapyrecordscopied"
     t.integer  "internalradiotherapy"
+    t.integer  "bonemarrowtransplantation"
   end
 
   create_table "last_doctors_visit_statuses", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "laterality_rlbmns", :force => true do |t|
@@ -408,6 +408,14 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "relapses", :force => true do |t|
+    t.integer  "number"
+    t.date     "date"
+    t.integer  "journal_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "remission_statuses", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
@@ -444,10 +452,10 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "surgeries", :force => true do |t|
-    t.integer  "studynumber"
     t.date     "surgerydate"
     t.integer  "surgerytype"
     t.integer  "surgeryradicality"
@@ -456,6 +464,7 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.integer  "surgerycompleteremovalorganlaterality"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.integer  "journal_id"
   end
 
   create_table "surgery_complete_removal_organ_lateralities", :force => true do |t|
@@ -474,6 +483,7 @@ ActiveRecord::Schema.define(:version => 20131010221338) do
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "seq"
   end
 
   create_table "surgery_types", :force => true do |t|

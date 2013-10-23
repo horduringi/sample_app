@@ -9,7 +9,15 @@ class JournalController < ApplicationController
       flash[:error] = "Medical abstraction form was not updated"
     end
     respond_to do |format|
-      format.html { render "form/show" }# show.html.erb
+      format.html { render "journal/show" }# show.html.erb
+    end
+  end
+  def show
+    @journal = Journal.find(params[:id])
+    gon.journal = @journal
+    respond_to do |format|
+      format.html #{ render "form/show" }# show.html.erb
+      format.json { render json: @journal }
     end
   end
 end

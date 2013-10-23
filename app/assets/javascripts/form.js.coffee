@@ -7,7 +7,29 @@
 #  $scope.country = ->
 #    alert "jei"
 
-app = angular.module("formApp",[])
+jQuery ->
+  $('form').on 'click', '.remove_fields', (event) ->
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    event.preventDefault()
+
+  $('form').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    event.preventDefault()
+
+app = angular.module("formApp",['ui.select2'])
 app.controller "FormCtrl", ($scope) ->
   $scope.journal = gon.journal
-  
+  $("#journal_cytostatic_drug_given_cytostaticdrugid").select2()
+  #$("#journal_cytostatic_drug_given_dosequality").select2()
+  #$("#journal_cytostatic_drug_given_anthracyclinesbolusinf").select2()
+  $scope.range = (min, max) ->
+    input = []
+    i = min
+
+    while i <= max
+      input.push i
+      i++
+    input

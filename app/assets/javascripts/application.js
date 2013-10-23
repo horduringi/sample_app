@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
+//= require underscore
 //= require angular
 //= require angular-resource
+//= require angular-ui-select2
 //= require ng-grid
 //= require static_pages
 //= require bootstrap

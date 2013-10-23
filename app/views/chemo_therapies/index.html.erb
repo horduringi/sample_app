@@ -1,0 +1,21 @@
+<h1>Listing chemo_therapies</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @chemo_therapies.each do |chemo_therapy| %>
+  <tr>
+    <td><%= link_to 'Show', chemo_therapy %></td>
+    <td><%= link_to 'Edit', edit_chemo_therapy_path(chemo_therapy) %></td>
+    <td><%= link_to 'Destroy', chemo_therapy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Chemo therapy', new_chemo_therapy_path %>

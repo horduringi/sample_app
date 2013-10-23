@@ -1,0 +1,17 @@
+<%= form_for(@chemo_therapy) do |f| %>
+  <% if @chemo_therapy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chemo_therapy.errors.count, "error") %> prohibited this chemo_therapy from being saved:</h2>
+
+      <ul>
+      <% @chemo_therapy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
