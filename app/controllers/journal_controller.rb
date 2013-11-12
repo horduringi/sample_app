@@ -20,4 +20,12 @@ class JournalController < ApplicationController
       format.json { render json: @journal }
     end
   end
+  def edit
+    @journal = Journal.find(params[:id])
+    gon.journal = @journal
+    respond_to do |format|
+      format.html #{ render "form/show" }# show.html.erb
+      format.json { render json: @journal }
+    end
+  end
 end

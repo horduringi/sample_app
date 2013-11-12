@@ -1,7 +1,8 @@
   <fieldset>
+    <br>
     <div class="row-fluid">
       <div class="span3">
-        <p>Body surface (m<sup>2</sup>) <b>at diagnosis</b>:</p>
+        <p>Body surface (m<sup>2</sup>):</p>
       </div>
       <div class="span2">
         <%= f.number_field :bodysurface, {step: 0.01, min: 0} %>
@@ -17,7 +18,7 @@
     </div>
     <div class="row-fluid">
       <div class="span3">
-        <p>Weight:</p>
+        <p>Weight (kg):</p>
       </div>
       <div class="span2">
         <%= f.number_field :weight, {step: 0.1, min: 0} %>
@@ -25,7 +26,7 @@
     </div>
     <div class="row-fluid">
       <div class="span3">
-        <p>Height:</p>
+        <p>Height (cm):</p>
       </div>
       <div class="span2">
         <%= f.number_field :height, {step: 0.1, min: 0} %>

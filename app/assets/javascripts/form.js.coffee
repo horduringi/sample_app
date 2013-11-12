@@ -25,6 +25,8 @@ app.controller "FormCtrl", ($scope) ->
   $("#journal_cytostatic_drug_given_cytostaticdrugid").select2()
   #$("#journal_cytostatic_drug_given_dosequality").select2()
   #$("#journal_cytostatic_drug_given_anthracyclinesbolusinf").select2()
+  $scope.chronicdiseasechange = () ->
+    $scope.chronicdiseasespecshow = [2,3,4,5].indexOf($scope.journal.chronicdisease) > -1
   $scope.range = (min, max) ->
     input = []
     i = min

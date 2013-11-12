@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131022225106) do
+ActiveRecord::Schema.define(:version => 20131110211642) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -31,17 +31,19 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.integer  "totalbodyirritation"
     t.date     "startdate"
     t.date     "completiondate"
-    t.float    "cumulativedose"
+    t.decimal  "cumulativedose"
     t.integer  "numberoffractions"
     t.integer  "radiotherapyrecordscopied"
     t.integer  "chemotherapy"
     t.date     "chemotherapydateofinitiation"
     t.date     "chemotherapydateofcompletion"
-    t.float    "bodysurfaceconditioning"
-    t.float    "weightconditioning"
-    t.float    "heightconditioning"
+    t.decimal  "bodysurfaceconditioning"
+    t.decimal  "weightconditioning"
+    t.decimal  "heightconditioning"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.string   "treatmentprotocol"
+    t.integer  "cardioprotectants"
   end
 
   create_table "carcinomas_tumor_types", :force => true do |t|
@@ -61,9 +63,9 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.integer  "journal_id"
     t.integer  "yearnumber"
     t.date     "measurementdate"
-    t.float    "bodysurface"
-    t.float    "weight"
-    t.float    "height"
+    t.decimal  "bodysurface"
+    t.decimal  "weight"
+    t.decimal  "height"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "estimated"
@@ -106,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.integer  "cytostaticdrugid"
     t.integer  "journal_id"
     t.integer  "chemoorbonemarrow"
-    t.float    "totalcumulateddosemg"
-    t.float    "totalcumulateddoseunits"
+    t.decimal  "totalcumulateddosemg"
+    t.decimal  "totalcumulateddoseunits"
     t.integer  "dosequality"
     t.integer  "anthracyclinesbolusinfnoyes"
     t.integer  "anthracyclinesbolusinf"
@@ -183,7 +185,7 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
 
   create_table "journals", :force => true do |t|
     t.integer  "studynumber"
-    t.integer  "userid"
+    t.integer  "user_id"
     t.datetime "datetimecreate"
     t.integer  "country"
     t.integer  "gender"
@@ -253,9 +255,6 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.integer  "externalbeamradiotherapy"
     t.date     "externalbeamradiotherapydateofstart"
     t.date     "externalbeamradiotherapydateofcompletion"
-    t.float    "radio1targed1dose"
-    t.float    "radio2targed2dose"
-    t.float    "radio3targed3dose"
     t.integer  "brachytherapy"
     t.date     "brachytherapydateofstart"
     t.date     "brachytherapydateofcompletion"
@@ -290,6 +289,12 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.date     "internalradiotherapyrecordscopied"
     t.integer  "internalradiotherapy"
     t.integer  "bonemarrowtransplantation"
+    t.integer  "chemocardioprotectants"
+    t.decimal  "chemotherapybodysurfaceatdiagnosis"
+    t.decimal  "chemotherapyweightatdiagnosis"
+    t.decimal  "chemotherapyheightatdiagnosis"
+    t.integer  "chemotherapyestimated"
+    t.date     "dateofextraction"
   end
 
   create_table "last_doctors_visit_statuses", :force => true do |t|
@@ -473,12 +478,6 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "surgery_complete_removal_organ_specs", :force => true do |t|
-    t.string   "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "surgery_radicalities", :force => true do |t|
     t.string   "text"
     t.datetime "created_at", :null => false
@@ -507,6 +506,7 @@ ActiveRecord::Schema.define(:version => 20131022225106) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
+    t.integer  "institute_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

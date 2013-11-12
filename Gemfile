@@ -19,7 +19,7 @@ gem 'underscore-rails'
 group :development do
 	gem 'annotate', '2.5.0'
 end
-
+gem 'delocalize'
 gem 'active_hash'
 gem 'angular-ui-select2-rails'
 # Gems used only for assets and not required

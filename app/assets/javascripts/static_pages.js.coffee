@@ -17,4 +17,4 @@ app.controller "MyCtrl", ($scope) ->
   $scope.gridOptions = 
     data: "myData"
     filterOptions: $scope.filterOptions
-    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="journal/{{row.getProperty(\'id\')}}/">{{row.getProperty(col.field)}}</a></span></div>'}]
+    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="journal/{{row.getProperty(\'id\')}}/edit">{{row.getProperty(col.field)}}</a></span></div>'}]
