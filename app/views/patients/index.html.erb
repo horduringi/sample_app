@@ -1,0 +1,159 @@
+<h1>Listing patients</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Datecreate</th>
+    <th>Country</th>
+    <th>Gender</th>
+    <th>Comments</th>
+    <th>Missinginfochemo</th>
+    <th>Missinginforadio</th>
+    <th>Missinginforadio</th>
+    <th>Missinginfosurgery</th>
+    <th>Radiorecordscopied</th>
+    <th>Chronicdisease</th>
+    <th>Chronicdiseasespec</th>
+    <th>Chromosomaldisorder</th>
+    <th>Chromosomaldisorderspec</th>
+    <th>Immunedeficiency</th>
+    <th>Congenitalanomaly</th>
+    <th>Neurofibromatosis</th>
+    <th>Otherfamilialcancersyndspec</th>
+    <th>Cancerinfamily</th>
+    <th>Cancerinfamilyspec</th>
+    <th>Prevsurgicalprocedures</th>
+    <th>Prevsurgicalproceduresspec</th>
+    <th>Prevradtherapy</th>
+    <th>Prevradtherapy</th>
+    <th>Firstprimcancerdiagnosis</th>
+    <th>Dateofdiagnosis</th>
+    <th>Firstprimcancertype</th>
+    <th>Leukemiasubtype</th>
+    <th>Hodgkinlymphomasubtype</th>
+    <th>Nonhodgkinlymphomasubtype</th>
+    <th>Cnstumorhistologicaltype</th>
+    <th>Cnstumorprimarytumorsite</th>
+    <th>Cnstumorprimarytumorsiteotherspec</th>
+    <th>Cnstumorlaterality</th>
+    <th>Neuroblastomaprimarytumorsite</th>
+    <th>Neuroblastomalaterality</th>
+    <th>Neuroblastomametastasisatdiagnosis</th>
+    <th>Renaltumortype</th>
+    <th>Renaltumortypeotherspec</th>
+    <th>Renaltumorlaterality</th>
+    <th>Renaltumormetastasisatdiagnosis</th>
+    <th>Malignantbonetumortype</th>
+    <th>Malignantbonetumorlaterality</th>
+    <th>Malignantbonetumormetastasisatdiagnosis</th>
+    <th>Malignantbonetumorprimarytumorsite</th>
+    <th>Malignantbonetumorprimarytumorsiteotherspec</th>
+    <th>Softtissuesarcomastumortype</th>
+    <th>Softtissuesarcomastumortypeotherspec</th>
+    <th>Softtissuesarcomaslaterality</th>
+    <th>Softtissuesarcomasprimarytumorsite</th>
+    <th>Softtissuesarcomasprimarytumorsiteotherspec</th>
+    <th>Softtissuesarcomasmetastasisatdiagnosis</th>
+    <th>Retinoblastomalaterality</th>
+    <th>Hepatictumortype</th>
+    <th>Carcinomastumortype</th>
+    <th>Carcinomastumortypeotherspec</th>
+    <th>Carcinomaslaterality</th>
+    <th>Carcinomasmetastasisatdiagnosis</th>
+    <th>Germcelltumorsandgonadalstumorstype</th>
+    <th>Germcelltumorsandgonadalstumorslaterality</th>
+    <th>Germcelltumorsandgonadalstumorsmetastasisatdiagnosis</th>
+    <th>Othertumortype</th>
+    <th>Othertumortypeotherspec</th>
+    <th>Otherprimarytumorsite</th>
+    <th>Otherprimarytumorsiteotherspec</th>
+    <th>Remissionstatus</th>
+    <th>Lastdoctorsvisit</th>
+    <th>Lastdoctorsvisitstatus</th>
+    <th>Permanentcomplicationsspec</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @patients.each do |patient| %>
+  <tr>
+    <td><%= patient.user %></td>
+    <td><%= patient.datecreate %></td>
+    <td><%= patient.country %></td>
+    <td><%= patient.gender %></td>
+    <td><%= patient.comments %></td>
+    <td><%= patient.missinginfochemo %></td>
+    <td><%= patient.missinginforadio %></td>
+    <td><%= patient.missinginforadio %></td>
+    <td><%= patient.missinginfosurgery %></td>
+    <td><%= patient.radiorecordscopied %></td>
+    <td><%= patient.chronicdisease %></td>
+    <td><%= patient.chronicdiseasespec %></td>
+    <td><%= patient.chromosomaldisorder %></td>
+    <td><%= patient.chromosomaldisorderspec %></td>
+    <td><%= patient.immunedeficiency %></td>
+    <td><%= patient.congenitalanomaly %></td>
+    <td><%= patient.neurofibromatosis %></td>
+    <td><%= patient.otherfamilialcancersyndspec %></td>
+    <td><%= patient.cancerinfamily %></td>
+    <td><%= patient.cancerinfamilyspec %></td>
+    <td><%= patient.prevsurgicalprocedures %></td>
+    <td><%= patient.prevsurgicalproceduresspec %></td>
+    <td><%= patient.prevradtherapy %></td>
+    <td><%= patient.prevradtherapy %></td>
+    <td><%= patient.firstprimcancerdiagnosis %></td>
+    <td><%= patient.dateofdiagnosis %></td>
+    <td><%= patient.firstprimcancertype %></td>
+    <td><%= patient.leukemiasubtype %></td>
+    <td><%= patient.hodgkinlymphomasubtype %></td>
+    <td><%= patient.nonhodgkinlymphomasubtype %></td>
+    <td><%= patient.cnstumorhistologicaltype %></td>
+    <td><%= patient.cnstumorprimarytumorsite %></td>
+    <td><%= patient.cnstumorprimarytumorsiteotherspec %></td>
+    <td><%= patient.cnstumorlaterality %></td>
+    <td><%= patient.neuroblastomaprimarytumorsite %></td>
+    <td><%= patient.neuroblastomalaterality %></td>
+    <td><%= patient.neuroblastomametastasisatdiagnosis %></td>
+    <td><%= patient.renaltumortype %></td>
+    <td><%= patient.renaltumortypeotherspec %></td>
+    <td><%= patient.renaltumorlaterality %></td>
+    <td><%= patient.renaltumormetastasisatdiagnosis %></td>
+    <td><%= patient.malignantbonetumortype %></td>
+    <td><%= patient.malignantbonetumorlaterality %></td>
+    <td><%= patient.malignantbonetumormetastasisatdiagnosis %></td>
+    <td><%= patient.malignantbonetumorprimarytumorsite %></td>
+    <td><%= patient.malignantbonetumorprimarytumorsiteotherspec %></td>
+    <td><%= patient.softtissuesarcomastumortype %></td>
+    <td><%= patient.softtissuesarcomastumortypeotherspec %></td>
+    <td><%= patient.softtissuesarcomaslaterality %></td>
+    <td><%= patient.softtissuesarcomasprimarytumorsite %></td>
+    <td><%= patient.softtissuesarcomasprimarytumorsiteotherspec %></td>
+    <td><%= patient.softtissuesarcomasmetastasisatdiagnosis %></td>
+    <td><%= patient.retinoblastomalaterality %></td>
+    <td><%= patient.hepatictumortype %></td>
+    <td><%= patient.carcinomastumortype %></td>
+    <td><%= patient.carcinomastumortypeotherspec %></td>
+    <td><%= patient.carcinomaslaterality %></td>
+    <td><%= patient.carcinomasmetastasisatdiagnosis %></td>
+    <td><%= patient.germcelltumorsandgonadalstumorstype %></td>
+    <td><%= patient.germcelltumorsandgonadalstumorslaterality %></td>
+    <td><%= patient.germcelltumorsandgonadalstumorsmetastasisatdiagnosis %></td>
+    <td><%= patient.othertumortype %></td>
+    <td><%= patient.othertumortypeotherspec %></td>
+    <td><%= patient.otherprimarytumorsite %></td>
+    <td><%= patient.otherprimarytumorsiteotherspec %></td>
+    <td><%= patient.remissionstatus %></td>
+    <td><%= patient.lastdoctorsvisit %></td>
+    <td><%= patient.lastdoctorsvisitstatus %></td>
+    <td><%= patient.permanentcomplicationsspec %></td>
+    <td><%= link_to 'Show', patient %></td>
+    <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
+    <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Patient', new_patient_path %>

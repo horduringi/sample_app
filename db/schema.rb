@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110211642) do
+ActiveRecord::Schema.define(:version => 20131113214453) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -406,6 +406,87 @@ ActiveRecord::Schema.define(:version => 20131110211642) do
     t.datetime "updated_at", :null => false
     t.integer  "seq"
   end
+
+  create_table "patients", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "datecreate"
+    t.integer  "country"
+    t.integer  "gender_id"
+    t.string   "comments"
+    t.integer  "missinginfochemo"
+    t.integer  "missinginforadio"
+    t.integer  "missinginfosurgery"
+    t.date     "radiorecordscopied"
+    t.integer  "chronicdisease"
+    t.string   "chronicdiseasespec"
+    t.integer  "chromosomaldisorder"
+    t.string   "chromosomaldisorderspec"
+    t.integer  "immunedeficiency"
+    t.integer  "congenitalanomaly"
+    t.integer  "neurofibromatosis"
+    t.string   "otherfamilialcancersyndspec"
+    t.integer  "cancerinfamily"
+    t.string   "cancerinfamilyspec"
+    t.integer  "prevsurgicalprocedures"
+    t.string   "prevsurgicalproceduresspec"
+    t.integer  "prevradtherapy",                                 :limit => 255
+    t.string   "firstprimcancerdiagnosis"
+    t.date     "dateofdiagnosis"
+    t.integer  "firstprimcancertype"
+    t.integer  "leukemiasubtype"
+    t.integer  "hodgkinlymphomasubtype"
+    t.integer  "nonhodgkinlymphomasubtype"
+    t.integer  "cnstumorhistologicaltype"
+    t.integer  "cnstumorprimarytumorsite"
+    t.string   "cnstumorprimarytumorsiteotherspec"
+    t.integer  "cnstumorlaterality"
+    t.integer  "neuroblastomaprimarytumorsite"
+    t.integer  "neuroblastomalaterality"
+    t.integer  "neuroblastomametastasisatdiagnosis"
+    t.integer  "renaltumortype"
+    t.string   "renaltumortypeotherspec"
+    t.integer  "renaltumorlaterality"
+    t.integer  "renaltumormetastasisatdiagnosis"
+    t.integer  "malignantbonetumortype"
+    t.integer  "malignantbonetumorlaterality"
+    t.integer  "malignantbonetumormetastasisatdiagnosis"
+    t.integer  "malignantbonetumorprimarytumorsite"
+    t.string   "malignantbonetumorprimarytumorsiteotherspec"
+    t.integer  "softtissuesarcomastumortype"
+    t.string   "softtissuesarcomastumortypeotherspec"
+    t.integer  "softtissuesarcomaslaterality"
+    t.integer  "softtissuesarcomasprimarytumorsite"
+    t.string   "softtissuesarcomasprimarytumorsiteotherspec"
+    t.integer  "softtissuesarcomasmetastasisatdiagnosis"
+    t.integer  "retinoblastomalaterality"
+    t.integer  "hepatictumortype"
+    t.integer  "carcinomastumortype"
+    t.string   "carcinomastumortypeotherspec"
+    t.integer  "carcinomaslaterality"
+    t.integer  "carcinomasmetastasisatdiagnosis"
+    t.integer  "germcelltumorsandgonadalstumorstype"
+    t.integer  "germcelltumorsandgonadalstumorslaterality"
+    t.integer  "germcellandgonadalstumorsmetastasisatdiagnosis"
+    t.integer  "othertumortype"
+    t.string   "othertumortypeotherspec"
+    t.integer  "otherprimarytumorsite"
+    t.string   "otherprimarytumorsiteotherspec"
+    t.integer  "remissionstatus"
+    t.date     "lastdoctorsvisit"
+    t.integer  "lastdoctorsvisitstatus"
+    t.string   "permanentcomplicationsspec"
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+    t.integer  "studynumber"
+    t.date     "dateofextraction"
+    t.integer  "otherfamilialcancersynd"
+    t.string   "prevradtherapyspec"
+    t.string   "malignantbonetumortypeotherspec"
+    t.integer  "germcelltumorsandgonadaltumorslaterality"
+  end
+
+  add_index "patients", ["gender_id"], :name => "index_patients_on_gender_id"
+  add_index "patients", ["user_id"], :name => "index_patients_on_user_id"
 
   create_table "radiation_qualities", :force => true do |t|
     t.string   "text"

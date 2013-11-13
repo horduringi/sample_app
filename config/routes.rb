@@ -1,5 +1,8 @@
 SampleApp::Application.routes.draw do
-  resources :relapses
+  
+
+
+  resources :patients
 
 
   get "journal/new"
@@ -9,7 +12,10 @@ SampleApp::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :journal
+  match '/journal/:id/edit_relapse(.:format)', to: 'journal#edit_relapse', via: 'get'
   resources :surgeries
+
+  #resources :relapses
 
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
