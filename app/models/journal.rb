@@ -7,6 +7,7 @@ class Journal < ActiveRecord::Base
   has_many :cytostatic_drug_given
   has_many :relapses
   belongs_to :user
+  belongs_to :patient
   accepts_nested_attributes_for :surgeries, allow_destroy: true
   accepts_nested_attributes_for :chemo_therapies, allow_destroy: true
   accepts_nested_attributes_for :bone_marrow_transplantations, allow_destroy: true

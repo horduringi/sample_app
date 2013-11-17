@@ -35,6 +35,12 @@ class PatientsController < ApplicationController
   # GET /patients/1/edit
   def edit
     @patient = Patient.find(params[:id])
+    gon.patient = @patient
+  end
+
+  def edit_remission
+    @patient = Patient.find(params[:id])
+    gon.patient = @patient
   end
 
   # POST /patients
@@ -60,7 +66,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.update_attributes(params[:patient])
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
+        format.html { redirect_to new_journal_path(patient_id: params[:id])}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,4 +1,4 @@
-<div ng-controller="FormCtrl" ng-app="formApp">
+<div ng-controller="PatientCtrl" ng-app="patientApp">
   <%= form_for(@patient) do |j| %>
   <div class="row-fluid">
     <div class="span3">     
@@ -26,7 +26,7 @@
         <p>Gender:</p>
     </div>
     <div class="span2">
-        <%= j.select :gender, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender), {}, {"ng-model" => "patient.gender"} %>
+        <%= j.select :gender_id, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender), {}, {"ng-model" => "patient.gender"} %>
     </div>
   </div>
   <br>
@@ -641,9 +641,8 @@
     </div>
   </div>
 
-    <div align="center">
-        <%= j.submit "Add relapse", class: "btn btn-large btn-primary" %>
-        <%= j.submit "No relapses", class: "btn btn-large" %>
+    <div align="right">
+        <%= j.submit "Next", class: "btn btn-large btn-primary" %>
   </div>
       
       <% end %>

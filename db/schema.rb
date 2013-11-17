@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113214453) do
+ActiveRecord::Schema.define(:version => 20131117225948) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -295,6 +295,7 @@ ActiveRecord::Schema.define(:version => 20131113214453) do
     t.decimal  "chemotherapyheightatdiagnosis"
     t.integer  "chemotherapyestimated"
     t.date     "dateofextraction"
+    t.integer  "patient_id"
   end
 
   create_table "last_doctors_visit_statuses", :force => true do |t|

@@ -3,15 +3,15 @@ SampleApp::Application.routes.draw do
 
 
   resources :patients
+  match '/patients/:id/edit_remission', to: 'patients#edit_remission', via: 'get'
 
-
-  get "journal/new"
+  #get "journal/new"
 
 
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :journal
+  resources :journals
   match '/journal/:id/edit_relapse(.:format)', to: 'journal#edit_relapse', via: 'get'
   resources :surgeries
 
