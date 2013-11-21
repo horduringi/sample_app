@@ -70,7 +70,9 @@
         <p>Radiotherapy records copied**:</p>
     </div>
     <div class="span6">
-        <%= j.date_select :radiorecordscopied, {:start_year => 2013, :end_year => Time.now.year, :default => @patient.radiorecordscopied, order: [:day, :month, :year], include_blank: true}, {:class => "date_generic"}%>
+      <%= j.number_field :radiorecordscopied_day, {placeholder: "day", :class => "date_generic"} %>
+      <%= j.number_field :radiorecordscopied_month, {placeholder: "month", :class => "date_generic"} %>
+      <%= j.number_field :radiorecordscopied_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
     <div class="span7 offset3">
         <p class="infoSmall">**copied WITHOUT any personal identifications. Leave empty if not relevant.</p>
@@ -251,7 +253,9 @@
         <p>Date of diagnosis*:</p>
     </div>
     <div class="span6">
-        <%= j.date_select :dateofdiagnosis, :start_year => 1970, :end_year => Time.now.year, :default => @patient.dateofdiagnosis, :include_blank=> true, order: [:day, :month, :year] %>
+      <%= j.number_field :dateofdiagnosis_day, {placeholder: "day", :class => "date_generic"}%>
+      <%= j.number_field :dateofdiagnosis_month, {placeholder: "month", :class => "date_generic"} %>
+      <%= j.number_field :dateofdiagnosis_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
     <div class="span7 offset3">
         <p class="infoSmall">*Please see definition of the date of diagnosis in the instructions.</p>

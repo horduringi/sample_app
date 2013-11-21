@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131117225948) do
+ActiveRecord::Schema.define(:version => 20131120222202) do
 
   create_table "anthracyclines_bolus_infs", :force => true do |t|
     t.string   "text"
@@ -23,27 +23,37 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
   create_table "bone_marrow_transplantations", :force => true do |t|
     t.integer  "journal_id"
     t.integer  "transplantationnumber"
-    t.date     "transplantationdate"
     t.integer  "autologous"
     t.integer  "allogeneic"
     t.integer  "donor"
     t.integer  "source"
     t.integer  "totalbodyirritation"
-    t.date     "startdate"
-    t.date     "completiondate"
     t.decimal  "cumulativedose"
     t.integer  "numberoffractions"
     t.integer  "radiotherapyrecordscopied"
     t.integer  "chemotherapy"
-    t.date     "chemotherapydateofinitiation"
-    t.date     "chemotherapydateofcompletion"
     t.decimal  "bodysurfaceconditioning"
     t.decimal  "weightconditioning"
     t.decimal  "heightconditioning"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "treatmentprotocol"
     t.integer  "cardioprotectants"
+    t.integer  "transplantationdate_day"
+    t.integer  "transplantationdate_month"
+    t.integer  "transplantationdate_year"
+    t.integer  "startdate_day"
+    t.integer  "startdate_month"
+    t.integer  "startdate_year"
+    t.integer  "chemotherapydateofinitiation_day"
+    t.integer  "chemotherapydateofinitiation_month"
+    t.integer  "chemotherapydateofinitiation_year"
+    t.integer  "chemotherapydateofcompletion_day"
+    t.integer  "chemotherapydateofcompletion_month"
+    t.integer  "chemotherapydateofcompletion_year"
+    t.integer  "completiondate_day"
+    t.integer  "completiondate_month"
+    t.integer  "completiondate_year"
   end
 
   create_table "carcinomas_tumor_types", :force => true do |t|
@@ -62,13 +72,15 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
   create_table "chemo_therapies", :force => true do |t|
     t.integer  "journal_id"
     t.integer  "yearnumber"
-    t.date     "measurementdate"
     t.decimal  "bodysurface"
     t.decimal  "weight"
     t.decimal  "height"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.integer  "estimated"
+    t.integer  "measurementdate_day"
+    t.integer  "measurementdate_month"
+    t.integer  "measurementdate_year"
   end
 
   create_table "chromosomal_disorders", :force => true do |t|
@@ -253,23 +265,14 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.string   "otherprimarytumorsiteotherspec"
     t.integer  "radiotherapy"
     t.integer  "externalbeamradiotherapy"
-    t.date     "externalbeamradiotherapydateofstart"
-    t.date     "externalbeamradiotherapydateofcompletion"
     t.integer  "brachytherapy"
-    t.date     "brachytherapydateofstart"
-    t.date     "brachytherapydateofcompletion"
-    t.date     "internalradiotherapydateofstart"
     t.integer  "surgery"
     t.integer  "chemotherapy"
-    t.date     "chemotherapydateinitiation"
-    t.date     "chemotherapydatecompletion"
     t.integer  "chemotherapytreatmentprotocol"
     t.string   "chemotherapytreatmentprotocolspec"
     t.integer  "chemotherapyCVC"
     t.integer  "chemotherapyknownnumberofcvc"
     t.integer  "chemotherapynumberofcvc"
-    t.date     "chemotherapyinsertiondatecvc"
-    t.date     "chemotherapypermanentremovaldate"
     t.integer  "relapse"
     t.integer  "relapseno"
     t.integer  "remissionstatus"
@@ -284,9 +287,6 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.string   "externalbeamradiotherapytreatinghospital"
     t.string   "brachytherapytreatinghospital"
     t.string   "internalradiotherapytreatinghospital"
-    t.date     "externalbeamradiotherapyrecordscopied"
-    t.date     "brachytherapyrecordscopied"
-    t.date     "internalradiotherapyrecordscopied"
     t.integer  "internalradiotherapy"
     t.integer  "bonemarrowtransplantation"
     t.integer  "chemocardioprotectants"
@@ -296,6 +296,46 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.integer  "chemotherapyestimated"
     t.date     "dateofextraction"
     t.integer  "patient_id"
+    t.integer  "treatment_no"
+    t.integer  "relapse_date_day"
+    t.integer  "relapse_date_month"
+    t.integer  "relapse_date_year"
+    t.integer  "externalbeamradiotherapydateofstart_day"
+    t.integer  "externalbeamradiotherapydateofstart_month"
+    t.integer  "externalbeamradiotherapydateofstart_year"
+    t.integer  "externalbeamradiotherapydateofcompletion_day"
+    t.integer  "externalbeamradiotherapydateofcompletion_month"
+    t.integer  "externalbeamradiotherapydateofcompletion_year"
+    t.integer  "externalbeamradiotherapyrecordscopied_day"
+    t.integer  "externalbeamradiotherapyrecordscopied_month"
+    t.integer  "externalbeamradiotherapyrecordscopied_year"
+    t.integer  "brachytherapydateofstart_day"
+    t.integer  "brachytherapydateofstart_month"
+    t.integer  "brachytherapydateofstart_year"
+    t.integer  "brachytherapydateofcompletion_day"
+    t.integer  "brachytherapydateofcompletion_month"
+    t.integer  "brachytherapydateofcompletion_year"
+    t.integer  "brachytherapyrecordscopied_day"
+    t.integer  "brachytherapyrecordscopied_month"
+    t.integer  "brachytherapyrecordscopied_year"
+    t.integer  "internalradiotherapydateofstart_day"
+    t.integer  "internalradiotherapydateofstart_month"
+    t.integer  "internalradiotherapydateofstart_year"
+    t.integer  "internalradiotherapyrecordscopied_day"
+    t.integer  "internalradiotherapyrecordscopied_month"
+    t.integer  "internalradiotherapyrecordscopied_year"
+    t.integer  "chemotherapydateinitiation_day"
+    t.integer  "chemotherapydateinitiation_month"
+    t.integer  "chemotherapydateinitiation_year"
+    t.integer  "chemotherapydatecompletion_day"
+    t.integer  "chemotherapydatecompletion_month"
+    t.integer  "chemotherapydatecompletion_year"
+    t.integer  "chemotherapyinsertiondatecvc_day"
+    t.integer  "chemotherapyinsertiondatecvc_month"
+    t.integer  "chemotherapyinsertiondatecvc_year"
+    t.integer  "chemotherapypermanentremovaldate_day"
+    t.integer  "chemotherapypermanentremovaldate_month"
+    t.integer  "chemotherapypermanentremovaldate_year"
   end
 
   create_table "last_doctors_visit_statuses", :force => true do |t|
@@ -417,7 +457,6 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.integer  "missinginfochemo"
     t.integer  "missinginforadio"
     t.integer  "missinginfosurgery"
-    t.date     "radiorecordscopied"
     t.integer  "chronicdisease"
     t.string   "chronicdiseasespec"
     t.integer  "chromosomaldisorder"
@@ -432,7 +471,6 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.string   "prevsurgicalproceduresspec"
     t.integer  "prevradtherapy",                                 :limit => 255
     t.string   "firstprimcancerdiagnosis"
-    t.date     "dateofdiagnosis"
     t.integer  "firstprimcancertype"
     t.integer  "leukemiasubtype"
     t.integer  "hodgkinlymphomasubtype"
@@ -473,17 +511,26 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.integer  "otherprimarytumorsite"
     t.string   "otherprimarytumorsiteotherspec"
     t.integer  "remissionstatus"
-    t.date     "lastdoctorsvisit"
     t.integer  "lastdoctorsvisitstatus"
     t.string   "permanentcomplicationsspec"
     t.datetime "created_at",                                                    :null => false
     t.datetime "updated_at",                                                    :null => false
-    t.integer  "studynumber"
+    t.string   "studynumber"
     t.date     "dateofextraction"
     t.integer  "otherfamilialcancersynd"
     t.string   "prevradtherapyspec"
     t.string   "malignantbonetumortypeotherspec"
     t.integer  "germcelltumorsandgonadaltumorslaterality"
+    t.boolean  "is_done"
+    t.integer  "radiorecordscopied_day"
+    t.integer  "radiorecordscopied_month"
+    t.integer  "radiorecordscopied_year"
+    t.integer  "dateofdiagnosis_day"
+    t.integer  "dateofdiagnosis_month"
+    t.integer  "dateofdiagnosis_year"
+    t.integer  "lastdoctorsvisit_day"
+    t.integer  "lastdoctorsvisit_month"
+    t.integer  "lastdoctorsvisit_year"
   end
 
   add_index "patients", ["gender_id"], :name => "index_patients_on_gender_id"
@@ -543,7 +590,6 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
   end
 
   create_table "surgeries", :force => true do |t|
-    t.date     "surgerydate"
     t.integer  "surgerytype"
     t.integer  "surgeryradicality"
     t.integer  "surgerycompleteremovalorgan"
@@ -552,6 +598,9 @@ ActiveRecord::Schema.define(:version => 20131117225948) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.integer  "journal_id"
+    t.integer  "surgerydate_day"
+    t.integer  "surgerydate_month"
+    t.integer  "surgerydate_year"
   end
 
   create_table "surgery_complete_removal_organ_lateralities", :force => true do |t|

@@ -30,14 +30,14 @@ class JournalsController < ApplicationController
     @journal = Journal.find(params[:id])
     gon.journal = @journal
     if @journal.update_attributes(params[:journal])
-      flash[:success] = "Medical abstraction form updated"
+      #flash[:success] = "Medical abstraction form updated"
     else
       flash[:error] = "Medical abstraction form was not updated"
     end
     if params[:commit] == "Add relapse"
-      redirect_path = new_journal_path(patient_id: @journal.patient_id)
+      redirect_path = new_journal_path(patient_id: @journal.patient_id, treatment_no: @journal.treatment_no + 1)
     else
-      redirect_path = "journal/show"
+      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
     end
     respond_to do |format|
       format.html { redirect_to redirect_path }# show.html.erb
@@ -52,7 +52,7 @@ class JournalsController < ApplicationController
     end
   end
   def new
-    @journal = Journal.new(patient_id: params[:patient_id])
+    @journal = Journal.new(patient_id: params[:patient_id], treatment_no: params[:treatment_no])
     @journal.save
     gon.journal = @journal
 

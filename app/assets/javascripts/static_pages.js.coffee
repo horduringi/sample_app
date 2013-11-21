@@ -15,7 +15,15 @@ app.controller "MyCtrl", ($scope) ->
     url: "/patients.json"
     async: false
   ).responseText), "studynumber")
+  $scope.myDataNotDone = $scope.myData.filter((el) ->
+      el.is_done == false)
+  $scope.myDataDone = $scope.myData.filter((el) ->
+      el.is_done == true)
   $scope.gridOptions = 
-    data: "myData"
+    data: "myDataNotDone"
     filterOptions: $scope.filterOptions
     columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="patients/{{row.getProperty(\'id\')}}/edit">{{row.getProperty(col.field)}}</a></span></div>'}]
+  $scope.gridOptionsDone = 
+    data: "myDataDone"
+    filterOptions: $scope.filterOptions
+    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number"}]

@@ -1,0 +1,41 @@
+<div ng-controller="FormCtrl" ng-app="formApp">
+  <%= form_for(@patient) do |j| %>
+  <div class="row-fluid">
+    <div class="span4">
+        <h2><b>After the cancer treatment</b></h2>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span3">
+      <p>Date of last doctors visit:</p>
+    </div>
+    <div class="span6">
+      Day<%= j.number_field :lastdoctorsvisit_day, {placeholder: "day", :class => "date_generic"} %>
+      Month<%= j.number_field :lastdoctorsvisit_month, {placeholder: "month", :class => "date_generic"} %>
+      Year<%= j.number_field :lastdoctorsvisit_year, {placeholder: "year", :class => "date_generic"} %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span3">
+      <p>Status at last doctor visit:</p>
+    </div>
+    <div class="span6">
+      <%= j.select :lastdoctorsvisitstatus, options_from_collection_for_select(LastDoctorsVisitStatus.all, :id,:lastdoctorsvisitstatus_combo,@patient.lastdoctorsvisitstatus), {}, {"ng-model" => "patient.lastdoctorsvisitstatus"} %> 
+    </div>
+  </div>
+  <!--Sýna ef ,,Permanent complications valið í combo fyrir ofan-->
+  <div class="row-fluid" ng-show="patient.lastdoctorsvisitstatus == '2'">
+    <div class="span3">
+        <p>If permanent complications, please specify in free text and note any disabilities:</p>
+    </div>
+    <div class="span9">
+        <%= j.text_area :permanentcomplicationsspec, :cols => "30", :rows => "7" %>
+    </div>
+  </div>
+  <%= j.hidden_field :is_done, value: true %>
+  <div align="right">
+        <%= j.submit "Submit", class: "btn btn-large btn-primary" %>
+  </div>
+      
+      <% end %>
+</div>

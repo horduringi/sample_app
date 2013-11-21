@@ -13,7 +13,9 @@
         <p>Date at measurement:</p>
       </div>
       <div class="span6">
-        <%= f.date_select :measurementdate, {:start_year => 1970, :end_year => Time.now.year, :include_blank=> true, order: [:day, :month, :year]}, {:class => "date_generic"} %>
+        <%= f.number_field :measurementdate_day, {placeholder: "day", :class => "date_generic"} %>
+        <%= f.number_field :measurementdate_month, {placeholder: "month", :class => "date_generic"} %>
+        <%= f.number_field :measurementdate_year, {placeholder: "year", :class => "date_generic"} %>
       </div>
     </div>
     <div class="row-fluid">
