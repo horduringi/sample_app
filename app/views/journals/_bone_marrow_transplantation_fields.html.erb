@@ -151,13 +151,13 @@
       <th></th>
     </thead>
     <tbody>
-  <%= f.fields_for :cytostatic_drug_given do |builder| %>
+  <%= f.fields_for :cytostatic_drug_given_bone_marrow do |builder| %>
     <%= render 'cytostatic_drug_given_bone_marrow_fields', f: builder %>
   <% end %>
     </tbody>
   </table>
-
-  <%= link_to_add_fields "Add cytostatic drug given", f, :cytostatic_drug_given %>
+  <p class="infoSmallRed">To add cytostatic drug please click "Add cytostatic drug given"</p>
+  <%= link_to_add_fields "Add cytostatic drug given", f, :cytostatic_drug_given_bone_marrow %>
 
   <br>
   <br>

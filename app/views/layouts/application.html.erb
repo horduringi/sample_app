@@ -10,7 +10,7 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    <% if signed_in? %>
+    <% if user_signed_in? %>
       <%= render 'layouts/header' %>
     <% end %>
       <div class="container">

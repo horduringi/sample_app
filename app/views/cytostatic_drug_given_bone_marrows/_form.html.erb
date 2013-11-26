@@ -1,0 +1,53 @@
+<%= form_for(@cytostatic_drug_given_bone_marrow) do |f| %>
+  <% if @cytostatic_drug_given_bone_marrow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cytostatic_drug_given_bone_marrow.errors.count, "error") %> prohibited this cytostatic_drug_given_bone_marrow from being saved:</h2>
+
+      <ul>
+      <% @cytostatic_drug_given_bone_marrow.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cytostaticdrugid %><br />
+    <%= f.number_field :cytostaticdrugid %>
+  </div>
+  <div class="field">
+    <%= f.label :journal %><br />
+    <%= f.text_field :journal %>
+  </div>
+  <div class="field">
+    <%= f.label :totalcumulateddosemg %><br />
+    <%= f.text_field :totalcumulateddosemg %>
+  </div>
+  <div class="field">
+    <%= f.label :totalcumulateddoseunits %><br />
+    <%= f.text_field :totalcumulateddoseunits %>
+  </div>
+  <div class="field">
+    <%= f.label :dosequality %><br />
+    <%= f.number_field :dosequality %>
+  </div>
+  <div class="field">
+    <%= f.label :anthracyclinesbolusinfnoyes %><br />
+    <%= f.number_field :anthracyclinesbolusinfnoyes %>
+  </div>
+  <div class="field">
+    <%= f.label :anthracyclinesbolusinf %><br />
+    <%= f.number_field :anthracyclinesbolusinf %>
+  </div>
+  <div class="field">
+    <%= f.label :cardioprotectants %><br />
+    <%= f.number_field :cardioprotectants %>
+  </div>
+  <div class="field">
+    <%= f.label :bone_marrow_transplantation %><br />
+    <%= f.text_field :bone_marrow_transplantation %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  include SessionsHelper
+  before_filter :authenticate_user!
 
   # Force signout to prefent CSRF attacks
   def handle_unverified_request

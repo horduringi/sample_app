@@ -26,7 +26,7 @@
         <p>Gender:</p>
     </div>
     <div class="span2">
-        <%= j.select :gender_id, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender), {}, {"ng-model" => "patient.gender"} %>
+        <%= j.select :gender_id, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender_id), {}, {"ng-model" => "patient.gender"} %>
     </div>
   </div>
   <br>
@@ -84,7 +84,7 @@
       <p>Data extraction accomplished by:</p>
     </div>
     <div class="span8">
-      <%= j.select :user_id, options_from_collection_for_select([current_user], :id,:name, current_user.id) %>
+      <%= @patient.user.name + " at " + Institute.find(@patient.user.institute_id).name %>
     </div>
   </div>
   <br>
@@ -573,7 +573,13 @@
       <div class="row-fluid">
         <div class="span4">
           <h2>9. Retinoblastoma</h2>
-          <p>Laterality</p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span3">  
+          <p>Laterality:</p>
+        </div>
+        <div class="span5">
           <%= j.select :retinoblastomalaterality, options_from_collection_for_select(LateralityRlbu.all, :id,:lateralityrlbu_combo, @patient.retinoblastomalaterality), {}, {"ng-model" => "patient.retinoblastomalaterality"} %>
         </div>
       </div>
@@ -582,7 +588,13 @@
     <div class="row-fluid">
       <div class="span4">
         <h2>10. Hepatic tumor</h2>
-        <p>Tumor type</p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <p>Tumor type:</p>
+      </div>
+      <div class="span5">  
         <%= j.select :hepatictumortype, options_from_collection_for_select(HepaticTumorType.all, :id,:hepatictumortype_combo, @patient.hepatictumortype), {}, {"ng-model" => "patient.hepatictumortype"} %>
       </div>
     </div>
@@ -592,17 +604,34 @@
       <h2>11. Carcinomas</h2>
     </div>
     <div class="row-fluid">
-      <div class="span4">
-        <p>Tumor type</p>
-        <%= j.select :carcinomastumortype, options_from_collection_for_select(CarcinomasTumorType.all, :id,:carcinomastumortype_combo, @patient.carcinomastumortype), {}, {"ng-model" => "patient.carcinomastumortype"} %>
-        <%= j.text_area :carcinomastumortypeotherspec, :cols => "20", :rows => "1", "ng-show" => "patient.carcinomastumortype" %>
-      </div>
       <div class="span3">
-        <p>Laterality</p>
+        <p>Tumor type:</p>
+      </div>
+      <div class="span5">
+        <%= j.select :carcinomastumortype, options_from_collection_for_select(CarcinomasTumorType.all, :id,:carcinomastumortype_combo, @patient.carcinomastumortype), {}, {"ng-model" => "patient.carcinomastumortype"} %>
+      </div>
+    </div>
+    <div class="row-fluid" ng-show="patient.carcinomastumortype=='6'">
+      <div class="span3 offset3">
+          <p>Please specify:</p>
+      </div>
+      <div class="span6">
+          <%= j.text_area :carcinomastumortypeotherspec, :cols => "30", :rows => "7" %>
+      </div>
+    </div>  
+    <div class="row-fluid">
+      <div class="span3">
+        <p>Laterality:</p>
+      </div>
+      <div class="span5">
         <%= j.select :carcinomaslaterality, options_from_collection_for_select(LateralityRlbn.all, :id,:lateralityrlbn_combo, @patient.carcinomaslaterality), {}, {"ng-model" => "patient.carcinomaslaterality"} %>
       </div>
-      <div class="span4">
-        <p>Metastasis at diagnosis</p>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <p>Metastasis at diagnosis:</p>
+      </div>
+      <div class="span5">
         <%= j.select :carcinomasmetastasisatdiagnosis, options_from_collection_for_select(NoYesUnknownNotInv.all, :id,:noyesunknownnotinv_combo, @patient.carcinomasmetastasisatdiagnosis), {}, {"ng-model" => "patient.carcinomasmetastasisatdiagnosis"} %>
       </div>
     </div>
@@ -613,16 +642,26 @@
       <p>GCT = Germ cell tumor</p>
     </div>
     <div class="row-fluid">
-      <div class="span4">
-        <p>Tumor type</p>
+      <div class="span3">
+        <p>Tumor type:</p>
+      </div>
+      <div class="span5">
         <%= j.select :germcelltumorsandgonadalstumorstype, options_from_collection_for_select(GermCellTumorsAndGonadalsTumorType.all, :id,:germcelltumorsandgonadalstumorstype_combo, @patient.germcelltumorsandgonadalstumorstype), {}, {"ng-model" => "patient.germcelltumorsandgonadalstumorstype"} %>
       </div>
+    </div>
+    <div class="row-fluid">
       <div class="span3">
         <p>Laterality</p>
+      </div>
+      <div class="span5">
         <%= j.select :germcelltumorsandgonadaltumorslaterality, options_from_collection_for_select(LateralityRlbmn.all, :id,:lateralityrlbmn_combo, @patient.germcelltumorsandgonadaltumorslaterality), {}, {"ng-model" => "patient.germcelltumorsandgonadaltumorslaterality"} %>
       </div>
-      <div class="span4">
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
         <p>Metastasis at diagnosis</p>
+      </div>
+      <div class="span5">
         <%= j.select :germcellandgonadalstumorsmetastasisatdiagnosis, options_from_collection_for_select(NoYesUnknownNotInv.all, :id,:noyesunknownnotinv_combo, @patient.germcellandgonadalstumorsmetastasisatdiagnosis), {}, {"ng-model" => "patient.germcellandgonadalstumorsmetastasisatdiagnosis"} %>
       </div>
     </div>
@@ -632,20 +671,39 @@
       <h2>13. Other</h2>
     </div>
     <div class="row-fluid">
+      <div class="span3">
+        <p>Tumor type:</p>
+      </div>  
       <div class="span5">
-        <p>Tumor type</p>
         <%= j.select :othertumortype, options_from_collection_for_select(OtherTumorType.all, :id,:othertumortype_combo, @patient.othertumortype), {}, {"ng-model" => "patient.othertumortype"} %>
-        <%= j.text_area :othertumortypeotherspec, :cols => "20", :rows => "1", "ng-show" => "patient.othertumortype == '2'" %>
       </div>
-      <div class="span5 offset1">
-        <p>Primary tumor site</p>
-        <%= j.select :otherprimarytumorsite, options_from_collection_for_select(OtherPrimaryTumorSite.all, :id,:otherprimarytumorsite_combo, @patient.otherprimarytumorsite), {}, {"ng-model" => "patient.otherprimarytumorsite"} %>
-        <%= j.text_area :otherprimarytumorsiteotherspec, :cols => "20", :rows => "1", "ng-show" =>"patient.otherprimarytumorsite == '9'" %>
+    </div>
+    <div class="row-fluid" ng-show="patient.othertumortype=='2'">
+      <div class="span3 offset3">
+          <p>Please specify:</p>
+      </div>
+      <div class="span6">
+          <%= j.text_area :othertumortypeotherspec, :cols => "30", :rows => "7" %>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <p>Primary tumor site:</p>
+      </div>
+      <div class="span5">
+        <%= j.select :otherprimarytumorsite, options_from_collection_for_select(OtherPrimaryTumorSite.all, :id,:otherprimarytumorsite_combo, @patient.otherprimarytumorsite), {}, {"ng-model" => "patient.otherprimarytumorsite"} %>        
+      </div>
+    </div>
+    <div class="row-fluid" ng-show="patient.otherprimarytumorsite=='9'">
+      <div class="span3 offset3">
+          <p>Please specify:</p>
+      </div>
+      <div class="span6">
+          <%= j.text_area :otherprimarytumorsiteotherspec, :cols => "30", :rows => "7" %>
       </div>
     </div>
   </div>
-
-    <div align="right">
+  <div align="right">
         <%= j.submit "Next", class: "btn btn-large btn-primary" %>
   </div>
       

@@ -1,0 +1,39 @@
+<h1>Listing cytostatic_drug_given_bone_marrows</h1>
+
+<table>
+  <tr>
+    <th>Cytostaticdrugid</th>
+    <th>Journal</th>
+    <th>Totalcumulateddosemg</th>
+    <th>Totalcumulateddoseunits</th>
+    <th>Dosequality</th>
+    <th>Anthracyclinesbolusinfnoyes</th>
+    <th>Anthracyclinesbolusinf</th>
+    <th>Cardioprotectants</th>
+    <th>Bone marrow transplantation</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cytostatic_drug_given_bone_marrows.each do |cytostatic_drug_given_bone_marrow| %>
+  <tr>
+    <td><%= cytostatic_drug_given_bone_marrow.cytostaticdrugid %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.journal %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.totalcumulateddosemg %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.totalcumulateddoseunits %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.dosequality %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.anthracyclinesbolusinfnoyes %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.anthracyclinesbolusinf %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.cardioprotectants %></td>
+    <td><%= cytostatic_drug_given_bone_marrow.bone_marrow_transplantation %></td>
+    <td><%= link_to 'Show', cytostatic_drug_given_bone_marrow %></td>
+    <td><%= link_to 'Edit', edit_cytostatic_drug_given_bone_marrow_path(cytostatic_drug_given_bone_marrow) %></td>
+    <td><%= link_to 'Destroy', cytostatic_drug_given_bone_marrow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cytostatic drug given bone marrow', new_cytostatic_drug_given_bone_marrow_path %>

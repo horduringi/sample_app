@@ -22,6 +22,9 @@ end
 gem 'delocalize'
 gem 'active_hash'
 gem 'angular-ui-select2-rails'
+
+gem 'devise'
+gem "cancan"
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sass-rails',   '3.2.5'

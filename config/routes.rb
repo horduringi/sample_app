@@ -2,15 +2,20 @@ SampleApp::Application.routes.draw do
   
 
 
+  resources :cytostatic_drug_given_bone_marrows
+
+
+  devise_for :users
+
   resources :patients
   match '/patients/:id/edit_remission', to: 'patients#edit_remission', via: 'get'
 
   #get "journal/new"
 
-
+  
 
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  #resources :sessions, only: [:new, :create, :destroy]
   resources :journals
   match '/journal/:id/edit_relapse(.:format)', to: 'journal#edit_relapse', via: 'get'
   resources :surgeries
@@ -29,9 +34,9 @@ SampleApp::Application.routes.draw do
   match '/form/:id(:format)', to: 'form#show', via: 'get'
 
 
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  #match '/signup',  to: 'users#new'
+  #match '/signin',  to: 'sessions#new'
+  #match '/signout', to: 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

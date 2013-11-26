@@ -56,6 +56,13 @@ class JournalsController < ApplicationController
     @journal.save
     gon.journal = @journal
 
+    # Where there is possible to add there should be one by default
+    @bone_marrow_transplantation = BoneMarrowTransplantation.create(journal_id: @journal.id)
+    #ChemoTherapy.create(journal_id: @journal.id)
+    #CytostaticDrugGiven.create(journal_id: @journal.id, chemoorbonemarrow: 1)
+    #CytostaticDrugGivenBoneMarrow.create(journal_id: @journal.id, bone_marrow_transplantation_id: @bone_marrow_transplantation.id, chemoorbonemarrow: 2)
+    Surgery.create(journal_id: @journal.id)
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @journal }

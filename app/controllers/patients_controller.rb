@@ -2,10 +2,14 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
-
+    if request.format == 'csv'
+      @patients = Patient.where(is_done: true).order(:studynumber)
+    else
+      @patients = Patient.all
+    end
     respond_to do |format|
       format.html # index.html.erb
+      format.csv { send_data @patients.to_csv({col_sep: ","},params) }
       format.json { render json: @patients }
     end
   end
@@ -35,6 +39,8 @@ class PatientsController < ApplicationController
   # GET /patients/1/edit
   def edit
     @patient = Patient.find(params[:id])
+    @patient.user_id = current_user.id
+    @patient.save
     gon.patient = @patient
   end
 

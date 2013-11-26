@@ -17,6 +17,37 @@ class Journal < ActiveRecord::Base
     @journal.country = countryid
     @journal.save!
   end
-
+  def self.max_surgeries_count
+    @j = self.find(:all, :select => 'journals.*, count(surgeries.id) as surgeries_count',
+             :joins => 'left outer join surgeries on surgeries.journal_id = journals.id',
+             :group => 'journals.id',
+             :order => 'surgeries_count DESC',
+             :limit => 1
+            )
+    Surgery.where(journal_id: @j[0].id).count
+  end
+  def self.max_chemo_therapies_count
+    @j = self.find(:all, :select => 'journals.*, count(chemo_therapies.id) as chemo_therapies_count',
+             :joins => 'left outer join chemo_therapies on chemo_therapies.journal_id = journals.id',
+             :group => 'journals.id',
+             :order => 'chemo_therapies_count DESC',
+             :limit => 1
+            )
+    ChemoTherapy.where(journal_id: @j[0].id).count
+  end
+  def self.max_cytostatic_drug_given_count
+    @j = self.find(:all, :select => 'journals.*, count(cytostatic_drug_givens.id) as cytostatic_drug_givens_count',
+             :joins => 'left outer join cytostatic_drug_givens on cytostatic_drug_givens.journal_id = journals.id',
+             :group => 'journals.id',
+             :order => 'cytostatic_drug_givens_count DESC',
+             :limit => 1
+            )
+    CytostaticDrugGiven.where(journal_id: @j[0].id).count
+  end
+  def self.get_values(id)
+    row = []
+    j = Journal.find(id)
+    row << j.attributes.values_at(*column_names)
+  end
 end
 

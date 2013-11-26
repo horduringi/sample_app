@@ -185,11 +185,11 @@
     </div>
   </div>
   <!--Allt sem tilheyrir Surgery birtist ef Yes í því comboi-->
+  <div ng-show="journal.surgery=='2'">
   <%= j.fields_for :surgeries do |builder| %>
     <%= render 'surgery_fields', f: builder %>
   <% end %>
-  <div ng-show="journal.surgery=='2'">
-    <p class="infoSmall">Please click "Add surgery" for each surgery and fill in the information.</p>
+    <p> Please click "Add surgery" to add another surgery and fill in the information.</p>
   <%= link_to_add_fields "Add surgery", j, :surgeries %>
   </div>
   <br><br>
@@ -279,7 +279,7 @@
     <% end %>
       </tbody>
     </table>
-
+    <p class="infoSmallRed">To add cytostatic drug please click "Add cytostatic drug given"</p>
     <%= link_to_add_fields "Add cytostatic drug given", j, :cytostatic_drug_given %>
     <br><br><br>
     <div class="row-fluid">
@@ -358,10 +358,11 @@
       <%= j.select :bonemarrowtransplantation, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.bonemarrowtransplantation), {}, {"ng-model" => "journal.bonemarrowtransplantation"} %> 
     </div>
   </div>
+  <div ng-show="journal.bonemarrowtransplantation == '2'">
   <%= j.fields_for :bone_marrow_transplantations do |builder| %>
   <%= render 'bone_marrow_transplantation_fields', f: builder %>
   <% end %>
-  <div ng-show="journal.bonemarrowtransplantation == '2'">
+  
   <%= link_to_add_fields "Add bone marrow transplantation", j, :bone_marrow_transplantations %>
   </div>
 

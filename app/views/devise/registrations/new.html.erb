@@ -1,0 +1,32 @@
+
+<% if params[:secret] == "AliceInWonderland" %>
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div><%= f.label :institute %><br />
+  <%= f.select :institute_id, options_from_collection_for_select(Institute.all, :id, :name), {:include_blank => true}, {} %></div>
+
+  <div><%= f.label :admin %>
+  <%= f.check_box :admin %></div>
+  <br />
+  <div><%= f.submit "Sign up", class: "btn btn-primary" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+<% end %>
