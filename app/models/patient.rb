@@ -3,97 +3,95 @@ class Patient < ActiveRecord::Base
   belongs_to :gender
   has_many :journals
   attr_accessible *Patient.column_names, :cancerinfamily, :cancerinfamilyspec, :carcinomaslaterality, :carcinomasmetastasisatdiagnosis, :carcinomastumortype, :carcinomastumortypeotherspec, :chromosomaldisorder, :chromosomaldisorderspec, :chronicdisease, :chronicdiseasespec, :cnstumorhistologicaltype, :cnstumorlaterality, :cnstumorprimarytumorsite, :cnstumorprimarytumorsiteotherspec, :comments, :congenitalanomaly, :country, :datecreate, :dateofdiagnosis, :firstprimcancerdiagnosis, :firstprimcancertype, :germcelltumorsandgonadalstumorslaterality, :germcelltumorsandgonadalstumorsmetastasisatdiagnosis, :germcelltumorsandgonadalstumorstype, :hepatictumortype, :hodgkinlymphomasubtype, :immunedeficiency, :lastdoctorsvisit, :lastdoctorsvisitstatus, :leukemiasubtype, :malignantbonetumorlaterality, :malignantbonetumormetastasisatdiagnosis, :malignantbonetumorprimarytumorsite, :malignantbonetumorprimarytumorsiteotherspec, :malignantbonetumortype, :missinginfochemo, :missinginforadio, :missinginforadio, :missinginfosurgery, :neuroblastomalaterality, :neuroblastomametastasisatdiagnosis, :neuroblastomaprimarytumorsite, :neurofibromatosis, :nonhodgkinlymphomasubtype, :otherfamilialcancersyndspec, :otherprimarytumorsite, :otherprimarytumorsiteotherspec, :othertumortype, :othertumortypeotherspec, :permanentcomplicationsspec, :prevradtherapy, :prevradtherapy, :prevsurgicalprocedures, :prevsurgicalproceduresspec, :radiorecordscopied, :remissionstatus, :renaltumorlaterality, :renaltumormetastasisatdiagnosis, :renaltumortype, :renaltumortypeotherspec, :retinoblastomalaterality, :softtissuesarcomaslaterality, :softtissuesarcomasmetastasisatdiagnosis, :softtissuesarcomasprimarytumorsite, :softtissuesarcomasprimarytumorsiteotherspec, :softtissuesarcomastumortype, :softtissuesarcomastumortypeotherspec
-  def self.to_csv(options = {}, params = {})
-    max_journals_count = params[:max_journals_count].to_i
-    max_surgeries_count = params[:max_surgeries_count].to_i
-    max_chemo_therapies_count = params[:max_chemo_therapies_count].to_i
-    max_cytostatic_drug_given_count = params[:max_cytostatic_drug_given_count].to_i
-    CSV.generate(options) do |csv|
-      row_header = []
-      column_names.each do |c|
-        row_header << c
-      end
-      (1..max_journals_count).each do |i|
-        Journal.column_names.each do |c|
-          row_header << c + i.to_s
-        end
-        (1..max_surgeries_count).each do |j|
-          Surgery.column_names.each do |c|
-            row_header << c + j.to_s
-          end
-        end
-        (1..max_chemo_therapies_count).each do |k|
-          ChemoTherapy.column_names.each do |c|
-            row_header << c + k.to_s
-          end
-        end
-        (1..max_cytostatic_drug_given_count).each do |k|
-          CytostaticDrugGiven.column_names.each do |c|
-            row_header << c + k.to_s
-          end
-        end
-      end
-      csv << row_header
-      
-      all.each do |patient|
-        row = []
-        patient.attributes.values_at(*column_names).each do |v|
-          row << v
-        end
-        journal_nil_count = max_journals_count - Journal.where(patient_id: patient.id).count
-        Journal.where(patient_id: patient.id).each do |journal|
-          Journal.get_values(journal.id).each do |j|
-            j.each do |value|
-              row << value
-            end
-          end
-          surgery_nil_count = max_surgeries_count - Surgery.where(journal_id: journal.id).count
-          Surgery.where(journal_id: journal.id).each do |surgery|
-            Surgery.get_values(surgery.id).each do |s|
-              s.each do |value|
-                row << value
-              end
-            end
-            (1..surgery_nil_count).each do
-              Surgery.column_names.each do
-                row << nil
-              end
-            end
-          end
-          chemo_therapy_nil_count = max_chemo_therapies_count - ChemoTherapy.where(journal_id: journal.id).count
-          ChemoTherapy.where(journal_id: journal.id).each do |chemo_therapy|
-            ChemoTherapy.get_values(chemo_therapy.id).each do |c|
-              c.each do |value|
-                row << value
-              end
-            end
-            (1..chemo_therapy_nil_count).each do
-              ChemoTherapy.column_names.each do
-                row << nil
-              end
-            end
-          end
-          cytostatic_drug_given_nil_count = max_cytostatic_drug_given_count - CytostaticDrugGiven.where(journal_id: journal.id).count
-          CytostaticDrugGiven.where(journal_id: journal.id).each do |cytostatic_drug_given|
-            CytostaticDrugGiven.get_values(cytostatic_drug_given.id).each do |c|
-              c.each do |value|
-                row << value
-              end
-            end
-            (1..cytostatic_drug_given_nil_count).each do
-              CytostaticDrugGiven.column_names.each do
-                row << nil
-              end
-            end
-          end
-        end
-        (1..journal_nil_count).each do
-          Journal.column_names.each do
-            row << nil
-          end
-        end
+  validates_presence_of :gender_id, :missinginfochemo, :missinginforadio, :missinginfosurgery, :radiorecordscopied_day, :radiorecordscopied_month, :radiorecordscopied_year, :dateofextraction, :chronicdisease, :chromosomaldisorder, :immunedeficiency, :congenitalanomaly, :neurofibromatosis, :otherfamilialcancersynd, :cancerinfamily, :prevsurgicalprocedures, :prevradtherapy, :dateofdiagnosis_day, :dateofdiagnosis_month, :dateofdiagnosis_year, :firstprimcancertype, :on => :update
+  validates_presence_of :leukemiasubtype, :if => :first_leukemia?
+  validates_presence_of :hodgkinlymphomasubtype, :if => :first_hodgkinlymphomasubtype?
+  validates_presence_of :nonhodgkinlymphomasubtype, :if => :first_nonhodgkinlymphomasubtype?
+  validates_presence_of :cnstumorhistologicaltype, :cnstumorprimarytumorsite, :cnstumorlaterality,  :if => :first_cnstumorhistologicaltype?
+  validates_presence_of :neuroblastomaprimarytumorsite, :neuroblastomalaterality, :neuroblastomametastasisatdiagnosis,  :if => :first_neuroblastomaprimarytumorsite?
+  validates_presence_of :renaltumortype, :renaltumorlaterality, :renaltumormetastasisatdiagnosis, :if => :first_renaltumortype?
+  validates_presence_of :malignantbonetumortype, :malignantbonetumorlaterality, :malignantbonetumormetastasisatdiagnosis, :malignantbonetumorprimarytumorsite, :if => :first_malignantbonetumortype?
+  validates_presence_of :softtissuesarcomastumortype, :softtissuesarcomaslaterality, :softtissuesarcomasprimarytumorsite, :softtissuesarcomasmetastasisatdiagnosis, :if => :first_softtissuesarcomastumortype?
+  validates_presence_of :retinoblastomalaterality, :if => :first_retinoblastomalaterality?
+  validates_presence_of :hepatictumortype, :if => :first_hepatictumortype?
+  validates_presence_of :carcinomastumortype, :carcinomaslaterality, :carcinomasmetastasisatdiagnosis, :if => :first_carcinomastumortype?
+  validates_presence_of :germcelltumorsandgonadalstumorstype, :germcelltumorsandgonadaltumorslaterality, :germcellandgonadalstumorsmetastasisatdiagnosis, :if => :first_germcelltumorsandgonadalstumorstype?
+  validates_presence_of :othertumortype, :otherprimarytumorsite, :if => :first_othertumortype?
 
-        csv << row
+  validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :in => Array(1..31) + [99]
+  validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :in => Array(1..12) + [99]
+  validates_inclusion_of :radiorecordscopied_year, :dateofdiagnosis_year, :in => Array(1970..2013) + [99]
+  def first_leukemia?
+    firstprimcancertype == 1
+  end
+  def first_hodgkinlymphomasubtype?
+    firstprimcancertype == 2
+  end
+  def first_nonhodgkinlymphomasubtype?
+    firstprimcancertype == 3
+  end
+  def first_cnstumorhistologicaltype?
+    firstprimcancertype == 4
+  end
+  def first_neuroblastomaprimarytumorsite?
+    firstprimcancertype == 5
+  end
+  def first_renaltumortype?
+    firstprimcancertype == 6
+  end
+  def first_malignantbonetumortype?
+    firstprimcancertype == 7
+  end
+  def first_softtissuesarcomastumortype?
+    firstprimcancertype == 8
+  end
+  def first_retinoblastomalaterality?
+    firstprimcancertype == 9
+  end
+  def first_hepatictumortype?
+    firstprimcancertype == 10
+  end
+  def first_carcinomastumortype?
+    firstprimcancertype == 11
+  end
+  def first_germcelltumorsandgonadalstumorstype?
+    firstprimcancertype == 12
+  end
+  def first_othertumortype?
+    firstprimcancertype == 13
+  end
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      columns = ["id", "country", "studynumber", "gender_id", "comments",
+                 "missinginfochemo", "missinginforadio", "missinginfosurgery",
+                 "radiorecordscopied_day", "radiorecordscopied_month", "radiorecordscopied_year",
+                 "user_id", "dateofextraction", "chronicdisease", "chronicdiseasespec",
+                 "chromosomaldisorder", "chromosomaldisorderspec", "immunedeficiency",
+                 "congenitalanomaly", "neurofibromatosis", "otherfamilialcancersynd",
+                 "otherfamilialcancersyndspec", "cancerinfamily", "cancerinfamilyspec",
+                 "prevsurgicalprocedures", "prevsurgicalproceduresspec", "prevradtherapy",
+                 "prevradtherapyspec", "firstprimcancerdiagnosis", "dateofdiagnosis_day",
+                 "dateofdiagnosis_month", "dateofdiagnosis_year", "firstprimcancertype",
+                 "leukemiasubtype", "hodgkinlymphomasubtype", "nonhodgkinlymphomasubtype",
+                 "cnstumorhistologicaltype", "cnstumorprimarytumorsite",
+                 "cnstumorprimarytumorsiteotherspec", "cnstumorlaterality", "neuroblastomaprimarytumorsite",
+                 "neuroblastomalaterality", "neuroblastomametastasisatdiagnosis",
+                 "renaltumortype", "renaltumortypeotherspec", "renaltumorlaterality",
+                 "renaltumormetastasisatdiagnosis", "malignantbonetumortype",
+                 "malignantbonetumortypeotherspec", "malignantbonetumorlaterality",
+                 "malignantbonetumormetastasisatdiagnosis", "malignantbonetumorprimarytumorsite",
+                 "malignantbonetumorprimarytumorsiteotherspec", "softtissuesarcomastumortype",
+                 "malignantbonetumorprimarytumorsiteotherspec", "softtissuesarcomaslaterality",
+                 "softtissuesarcomasprimarytumorsite", "softtissuesarcomasprimarytumorsiteotherspec",
+                 "softtissuesarcomasmetastasisatdiagnosis", "retinoblastomalaterality",
+                 "hepatictumortype", "carcinomastumortype", "carcinomastumortypeotherspec",
+                 "carcinomaslaterality", "carcinomasmetastasisatdiagnosis", "germcelltumorsandgonadalstumorstype",
+                 "germcelltumorsandgonadaltumorslaterality", "germcellandgonadalstumorsmetastasisatdiagnosis", "othertumortype",
+                 "othertumortypeotherspec", "otherprimarytumorsite", "otherprimarytumorsiteotherspec"
+               ]
+      csv << columns
+      all.each do |patient|
+        csv << patient.attributes.values_at(*columns)
       end
     end
   end

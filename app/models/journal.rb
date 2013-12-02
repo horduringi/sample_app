@@ -13,9 +13,41 @@ class Journal < ActiveRecord::Base
   accepts_nested_attributes_for :bone_marrow_transplantations, allow_destroy: true
   accepts_nested_attributes_for :cytostatic_drug_given, allow_destroy: true
   accepts_nested_attributes_for :relapses, allow_destroy: true
+
+  validates_presence_of :patient_id
+  #validates_presence_of :radiotherapy, :surgery, :chemotherapy, :bonemarrowtransplantation
   def self.setcountry(countryid)
     @journal.country = countryid
     @journal.save!
+  end
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      columns = ["id", "patient_id", "relapse_date_day", "relapse_date_month", "relapse_date_year",
+                "radiotherapy", "externalbeamradiotherapy", "externalbeamradiotherapydateofstart_day",
+                "externalbeamradiotherapydateofstart_month", "externalbeamradiotherapydateofstart_year",
+                "externalbeamradiotherapydateofcompletion_day", "externalbeamradiotherapydateofcompletion_month",
+                "externalbeamradiotherapydateofcompletion_year", "externalbeamradiotherapytreatinghospital",
+                "externalbeamradiotherapyrecordscopied_day", "externalbeamradiotherapyrecordscopied_month",
+                "externalbeamradiotherapyrecordscopied_year", "brachytherapy", "brachytherapydateofstart_day",
+                "brachytherapydateofstart_month", "brachytherapydateofstart_year", "brachytherapydateofcompletion_day",
+                "brachytherapydateofcompletion_month", "brachytherapydateofcompletion_year", "brachytherapytreatinghospital",
+                "brachytherapyrecordscopied_day", "brachytherapyrecordscopied_month", "brachytherapyrecordscopied_year",
+                "internalradiotherapy", "internalradiotherapydateofstart_day", "internalradiotherapydateofstart_month",
+                "internalradiotherapydateofstart_year", "internalradiotherapytreatinghospital", "internalradiotherapyrecordscopied_day",
+                "internalradiotherapyrecordscopied_month", "internalradiotherapyrecordscopied_year", "surgery",
+                "chemotherapy", "chemotherapydateinitiation_day", "chemotherapydateinitiation_month", "chemotherapydateinitiation_year",
+                "chemotherapydatecompletion_day", "chemotherapydatecompletion_month", "chemotherapydatecompletion_year",
+                "chemotherapybodysurfaceatdiagnosis", "chemotherapyweightatdiagnosis", "chemotherapyheightatdiagnosis",
+                "chemotherapyestimated", "chemocardioprotectants", "chemotherapytreatmentprotocolspec", 
+                "chemotherapyCVC", "chemotherapyinsertiondatecvc_day", "chemotherapyinsertiondatecvc_month",
+                "chemotherapyinsertiondatecvc_year", "chemotherapypermanentremovaldate_day", "chemotherapypermanentremovaldate_month",
+                "chemotherapypermanentremovaldate_year", "bonemarrowtransplantation" 
+      ]
+      csv << column_names
+      all.each do |journal|
+        csv << journal.attributes.values_at(*columns)
+      end
+    end
   end
   def self.max_surgeries_count
     @j = self.find(:all, :select => 'journals.*, count(surgeries.id) as surgeries_count',

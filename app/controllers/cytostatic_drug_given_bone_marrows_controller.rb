@@ -2,11 +2,16 @@ class CytostaticDrugGivenBoneMarrowsController < ApplicationController
   # GET /cytostatic_drug_given_bone_marrows
   # GET /cytostatic_drug_given_bone_marrows.json
   def index
-    @cytostatic_drug_given_bone_marrows = CytostaticDrugGivenBoneMarrow.all
+    if request.format == 'csv'
+      @cytostatic_drug_given_bone_marrows = CytostaticDrugGivenBoneMarrow.order(:id)
+    else
+      @cytostatic_drug_given_bone_marrows = CytostaticDrugGivenBoneMarrow.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @cytostatic_drug_given_bone_marrows }
+      format.csv { send_data @cytostatic_drug_given_bone_marrows.to_csv({col_sep: ","}) }
     end
   end
 

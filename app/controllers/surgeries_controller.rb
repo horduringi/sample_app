@@ -2,11 +2,16 @@ class SurgeriesController < ApplicationController
   # GET /surgeries
   # GET /surgeries.json
   def index
-    @surgeries = Surgery.all
+    if request.format == 'csv'
+      @surgeries = Surgery.order(:id)
+    else
+      @surgeries = Surgery.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @surgeries }
+      format.csv { send_data @surgeries.to_csv({col_sep: ","}) }
     end
   end
 

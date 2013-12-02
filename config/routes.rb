@@ -11,7 +11,10 @@ SampleApp::Application.routes.draw do
   match '/patients/:id/edit_remission', to: 'patients#edit_remission', via: 'get'
 
   #get "journal/new"
-
+  resources :bone_marrow_transplantations
+  resources :chemo_therapies
+  resources :cytostatic_drug_givens
+  resources :cytostatic_drug_given_bone_marrows
   
 
   resources :users

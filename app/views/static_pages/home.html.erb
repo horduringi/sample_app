@@ -17,8 +17,8 @@
       Total: {{myDataDone.length}}
       <% if current_user.admin %>
   <p>
-  Download:
-  <%= link_to "CSV", patients_path(format: "csv", max_journals_count: Patient.max_journals_count, max_surgeries_count: Journal.max_surgeries_count, max_chemo_therapies_count: Journal.max_chemo_therapies_count, max_cytostatic_drug_given_count: Journal.max_cytostatic_drug_given_count) %>
+  Download CSV:
+  <%= link_to "Patients", patients_path(format: "csv") %> | <%= link_to "Treatments", journals_path(format: "csv") %> | <%= link_to "Surgeries", surgeries_path(format: "csv") %> | <%= link_to "BoneMarrowTransplantations", bone_marrow_transplantations_path(format: "csv") %> | <%= link_to "ChemoTherapies", chemo_therapies_path(format: "csv") %> | <%= link_to "CytostaticDrugGivens", cytostatic_drug_givens_path(format: "csv") %> | <%= link_to "CytostaticDrugGivenBoneMarrows", cytostatic_drug_given_bone_marrows_path(format: "csv") %>
   </p>
 <% end %> 
     </div>

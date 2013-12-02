@@ -1,11 +1,16 @@
 class JournalsController < ApplicationController
 
   def index
-    @journals = Journal.all
+    if request.format == 'csv'
+      @journals = Journal.order(:id)
+    else
+      @journals = Journal.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @journals }
+      format.csv { send_data @journals.to_csv({col_sep: ","}) }
     end
   end
   def create
@@ -18,7 +23,7 @@ class JournalsController < ApplicationController
 
     respond_to do |format|
       if @journal.save
-        format.html { redirect_to redirect_path, notice: 'Journal was successfully created.' }
+        format.html { redirect_to redirect_path(patient_id: params[:id], treatment_no: params[:treatment_no] + 1), notice: 'Journal was successfully created.' }
         format.json { render json: @journal, status: :created, location: @journal }
       else
         format.html { render action: "new" }
@@ -29,18 +34,22 @@ class JournalsController < ApplicationController
   def update
     @journal = Journal.find(params[:id])
     gon.journal = @journal
-    if @journal.update_attributes(params[:journal])
-      #flash[:success] = "Medical abstraction form updated"
-    else
-      flash[:error] = "Medical abstraction form was not updated"
-    end
+    
     if params[:commit] == "Add relapse"
-      redirect_path = new_journal_path(patient_id: @journal.patient_id, treatment_no: @journal.treatment_no + 1)
+      redirect_path = new_journal_path(patient_id: @journal.patient_id, treatment_no: @journal.treatment_no)
     else
       redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
     end
+    
     respond_to do |format|
-      format.html { redirect_to redirect_path }# show.html.erb
+      if @journal.update_attributes(params[:journal])
+        format.html { redirect_to redirect_path }# show.html.erb
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit"}
+        format.json { render json: @patient.errors, status: :unprocessable_entity }
+      end
+      
     end
   end
   def show
@@ -52,16 +61,15 @@ class JournalsController < ApplicationController
     end
   end
   def new
-    @journal = Journal.new(patient_id: params[:patient_id], treatment_no: params[:treatment_no])
-    @journal.save
+    @journal = Journal.new
     gon.journal = @journal
 
     # Where there is possible to add there should be one by default
-    @bone_marrow_transplantation = BoneMarrowTransplantation.create(journal_id: @journal.id)
+    #@bone_marrow_transplantation = BoneMarrowTransplantation.create(journal_id: @journal.id)
     #ChemoTherapy.create(journal_id: @journal.id)
     #CytostaticDrugGiven.create(journal_id: @journal.id, chemoorbonemarrow: 1)
     #CytostaticDrugGivenBoneMarrow.create(journal_id: @journal.id, bone_marrow_transplantation_id: @bone_marrow_transplantation.id, chemoorbonemarrow: 2)
-    Surgery.create(journal_id: @journal.id)
+    #Surgery.create(journal_id: @journal.id)
 
     respond_to do |format|
       format.html # new.html.erb

@@ -2,11 +2,16 @@ class ChemoTherapiesController < ApplicationController
   # GET /chemo_therapies
   # GET /chemo_therapies.json
   def index
-    @chemo_therapies = ChemoTherapy.all
+    if request.format == 'csv'
+      @chemo_therapies = ChemoTherapy.order(:id)
+    else
+      @chemo_therapies = ChemoTherapy.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @chemo_therapies }
+      format.csv {send_data @chemo_therapies.to_csv({col_sep: ","}) }
     end
   end
 

@@ -1,0 +1,17 @@
+<%= form_for(@cytostatic_drug_given) do |f| %>
+  <% if @cytostatic_drug_given.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cytostatic_drug_given.errors.count, "error") %> prohibited this cytostatic_drug_given from being saved:</h2>
+
+      <ul>
+      <% @cytostatic_drug_given.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

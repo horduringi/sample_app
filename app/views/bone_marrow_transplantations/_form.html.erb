@@ -1,0 +1,17 @@
+<%= form_for(@bone_marrow_transplantation) do |f| %>
+  <% if @bone_marrow_transplantation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bone_marrow_transplantation.errors.count, "error") %> prohibited this bone_marrow_transplantation from being saved:</h2>
+
+      <ul>
+      <% @bone_marrow_transplantation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

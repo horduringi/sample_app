@@ -9,7 +9,7 @@ class PatientsController < ApplicationController
     end
     respond_to do |format|
       format.html # index.html.erb
-      format.csv { send_data @patients.to_csv({col_sep: ","},params) }
+      format.csv { send_data @patients.to_csv({col_sep: ","}) }
       format.json { render json: @patients }
     end
   end
@@ -40,7 +40,7 @@ class PatientsController < ApplicationController
   def edit
     @patient = Patient.find(params[:id])
     @patient.user_id = current_user.id
-    @patient.save
+    #@patient.save
     gon.patient = @patient
   end
 
@@ -72,8 +72,14 @@ class PatientsController < ApplicationController
     if params[:commit] == "Next"
       redirect_path = new_journal_path(patient_id: params[:id], treatment_no: 1)
     else
-      redirect_path = "/"
+      redirect_path = "/edit"
     end
+    #@patient.user_id = current_user.id
+    #@patient.save
+    #params_copy = params
+    #params_copy.merge(params_copy){|k, v| v.nil? ? 0 : v}
+
+    #gon.patient = params_copy[:patient]
 
     respond_to do |format|
       if @patient.update_attributes(params[:patient])

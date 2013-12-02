@@ -7,4 +7,15 @@ class CytostaticDrugGivenBoneMarrow < ActiveRecord::Base
     j = CytostaticDrugGivenBoneMarrow.find(id)
     row << j.attributes.values_at(*column_names)
   end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      columns = ["id", "bone_marrow_transplantation_id", "cytostaticdrugid", "totalcumulateddosemg", "dosequality",
+        "anthracyclinesbolusinf", "chemoorbonemarrow"]
+      csv << column_names
+      all.each do |cytostatic_drug_given_bone_marrows|
+        csv << cytostatic_drug_given_bone_marrows.attributes.values_at(*columns)
+      end
+    end
+  end
 end

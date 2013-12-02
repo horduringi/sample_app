@@ -1,0 +1,21 @@
+<h1>Listing cytostatic_drug_givens</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cytostatic_drug_givens.each do |cytostatic_drug_given| %>
+  <tr>
+    <td><%= link_to 'Show', cytostatic_drug_given %></td>
+    <td><%= link_to 'Edit', edit_cytostatic_drug_given_path(cytostatic_drug_given) %></td>
+    <td><%= link_to 'Destroy', cytostatic_drug_given, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cytostatic drug given', new_cytostatic_drug_given_path %>

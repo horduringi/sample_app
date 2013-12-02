@@ -1,0 +1,21 @@
+<h1>Listing bone_marrow_transplantations</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bone_marrow_transplantations.each do |bone_marrow_transplantation| %>
+  <tr>
+    <td><%= link_to 'Show', bone_marrow_transplantation %></td>
+    <td><%= link_to 'Edit', edit_bone_marrow_transplantation_path(bone_marrow_transplantation) %></td>
+    <td><%= link_to 'Destroy', bone_marrow_transplantation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bone marrow transplantation', new_bone_marrow_transplantation_path %>
