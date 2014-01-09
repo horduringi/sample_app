@@ -14,8 +14,39 @@ class Journal < ActiveRecord::Base
   accepts_nested_attributes_for :cytostatic_drug_given, allow_destroy: true
   accepts_nested_attributes_for :relapses, allow_destroy: true
 
-  validates_presence_of :patient_id
-  #validates_presence_of :radiotherapy, :surgery, :chemotherapy, :bonemarrowtransplantation
+  validates_presence_of :patient_id, :radiotherapy, :surgery, :chemotherapy, :bonemarrowtransplantation
+
+  validates_inclusion_of :relapse_date_day, :externalbeamradiotherapydateofstart_day, :externalbeamradiotherapydateofcompletion_day, :externalbeamradiotherapyrecordscopied_day, :brachytherapydateofstart_day, :brachytherapydateofcompletion_day, :brachytherapyrecordscopied_day, :internalradiotherapydateofstart_day, :internalradiotherapyrecordscopied_day, :chemotherapydateinitiation_day, :chemotherapydatecompletion_day, :chemotherapyinsertiondatecvc_day, :chemotherapypermanentremovaldate_day, :in => Array(1..31) + [99] + [nil]
+  validates_inclusion_of :relapse_date_month, :externalbeamradiotherapydateofstart_month, :externalbeamradiotherapydateofcompletion_month, :externalbeamradiotherapyrecordscopied_month, :brachytherapydateofstart_month, :brachytherapydateofcompletion_month, :brachytherapyrecordscopied_month, :internalradiotherapydateofstart_month, :internalradiotherapyrecordscopied_month, :chemotherapydateinitiation_month, :chemotherapydatecompletion_month, :chemotherapyinsertiondatecvc_month, :chemotherapypermanentremovaldate_month, :in => Array(1..12) + [99] + [nil]
+  validates_inclusion_of :relapse_date_year, :externalbeamradiotherapydateofstart_year, :externalbeamradiotherapydateofcompletion_year, :externalbeamradiotherapyrecordscopied_year, :brachytherapydateofstart_year, :brachytherapydateofcompletion_year, :brachytherapyrecordscopied_year, :internalradiotherapydateofstart_year, :internalradiotherapyrecordscopied_year, :chemotherapydateinitiation_year, :chemotherapydatecompletion_year, :chemotherapyinsertiondatecvc_year, :chemotherapypermanentremovaldate_year, :in => Array(1970..2013) + [99] + [nil]
+
+  validates_presence_of :externalbeamradiotherapy, :brachytherapy, :internalradiotherapy, :if => :radio_therapy?
+  validates_presence_of :externalbeamradiotherapydateofstart_day, :externalbeamradiotherapydateofstart_month, :externalbeamradiotherapydateofstart_year, :externalbeamradiotherapydateofcompletion_day, :externalbeamradiotherapydateofcompletion_month, :externalbeamradiotherapydateofcompletion_year, :externalbeamradiotherapyrecordscopied_day, :externalbeamradiotherapyrecordscopied_month, :externalbeamradiotherapyrecordscopied_year, :if => :external_beam_radio_therapy?
+  validates_presence_of :brachytherapydateofstart_day, :brachytherapydateofstart_month, :brachytherapydateofstart_year, :brachytherapydateofcompletion_day, :brachytherapydateofcompletion_month, :brachytherapydateofcompletion_year, :brachytherapyrecordscopied_day, :brachytherapyrecordscopied_month, :brachytherapyrecordscopied_year, :if => :brachy_therapy?
+  validates_presence_of :internalradiotherapydateofstart_day, :internalradiotherapydateofstart_month, :internalradiotherapydateofstart_year, :internalradiotherapyrecordscopied_day, :internalradiotherapyrecordscopied_month, :internalradiotherapyrecordscopied_year, :if => :internal_radio_therapy?
+
+  validates_presence_of :chemotherapydateinitiation_day, :chemotherapydateinitiation_month, :chemotherapydateinitiation_year, :chemotherapydatecompletion_day, :chemotherapydatecompletion_month, :chemotherapydatecompletion_year, :chemotherapybodysurfaceatdiagnosis, :chemotherapyweightatdiagnosis, :chemotherapyheightatdiagnosis, :chemocardioprotectants, :chemotherapyestimated, :chemotherapyCVC, :if => :chemo_therapy?
+  validates_presence_of :chemotherapyinsertiondatecvc_day, :chemotherapyinsertiondatecvc_month, :chemotherapyinsertiondatecvc_year, :chemotherapypermanentremovaldate_day, :chemotherapypermanentremovaldate_month, :chemotherapypermanentremovaldate_year, :if => :cvc_inserted?
+
+  validates_format_of :chemotherapybodysurfaceatdiagnosis, :chemotherapyweightatdiagnosis, :chemotherapyheightatdiagnosis,  :with => /^\d*+\,?\d*/
+  def radio_therapy?
+    radiotherapy == 1
+  end
+  def external_beam_radio_therapy?
+    externalbeamradiotherapy == 1
+  end
+  def brachy_therapy?
+    brachytherapy == 1
+  end
+  def internal_radio_therapy?
+    internalradiotherapy == 1
+  end
+  def chemo_therapy?
+    chemotherapy == 1
+  end
+  def cvc_inserted?
+    chemotherapyCVC == 1
+  end
   def self.setcountry(countryid)
     @journal.country = countryid
     @journal.save!
@@ -43,7 +74,7 @@ class Journal < ActiveRecord::Base
                 "chemotherapyinsertiondatecvc_year", "chemotherapypermanentremovaldate_day", "chemotherapypermanentremovaldate_month",
                 "chemotherapypermanentremovaldate_year", "bonemarrowtransplantation" 
       ]
-      csv << column_names
+      csv << columns
       all.each do |journal|
         csv << journal.attributes.values_at(*columns)
       end

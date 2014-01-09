@@ -1,5 +1,16 @@
 <div ng-controller="FormCtrl" ng-app="formApp">
   <%= form_for(@patient) do |j| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% @patient.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="row-fluid">
     <div class="span4">
         <h2><b>After the cancer treatment</b></h2>
@@ -20,7 +31,7 @@
       <p>Status at last doctor visit:</p>
     </div>
     <div class="span6">
-      <%= j.select :lastdoctorsvisitstatus, options_from_collection_for_select(LastDoctorsVisitStatus.all, :id,:lastdoctorsvisitstatus_combo,@patient.lastdoctorsvisitstatus), {}, {"ng-model" => "patient.lastdoctorsvisitstatus"} %> 
+      <%= j.select :lastdoctorsvisitstatus, options_from_collection_for_select(LastDoctorsVisitStatus.all, :seq,:lastdoctorsvisitstatus_combo,@patient.lastdoctorsvisitstatus), {include_blank: :true}, {} %> 
     </div>
   </div>
   <!--Sýna ef ,,Permanent complications valið í combo fyrir ofan-->

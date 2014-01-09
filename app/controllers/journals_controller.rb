@@ -15,15 +15,17 @@ class JournalsController < ApplicationController
   end
   def create
     @journal = Journal.new(params[:journal])
+    gon.journal = @journal
     if params[:commit] == "Add relapse"
-      redirect_path = new_journal_path
+      new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no + 1 } }
+      redirect_path = new_journal_path(new_params)
     else
-      redirect_path = "patients/remission_form"
+      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
     end
 
     respond_to do |format|
       if @journal.save
-        format.html { redirect_to redirect_path(patient_id: params[:id], treatment_no: params[:treatment_no] + 1), notice: 'Journal was successfully created.' }
+        format.html { redirect_to redirect_path, notice: 'Journal was successfully created.' }
         format.json { render json: @journal, status: :created, location: @journal }
       else
         format.html { render action: "new" }
@@ -73,7 +75,7 @@ class JournalsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @journal }
+      #format.json { render json: @journal }
     end
   end
   def edit

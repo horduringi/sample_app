@@ -13,6 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.numeric.extensions
+//= require jquery.inputmask.date.extensions
 //= require underscore
 //= require angular
 //= require angular-resource
@@ -20,4 +24,5 @@
 //= require ng-grid
 //= require static_pages
 //= require bootstrap
+//= require input_checker
 //= require_tree .

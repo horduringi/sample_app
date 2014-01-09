@@ -1,14 +1,25 @@
 <div ng-controller="FormCtrl" ng-app="formApp">
   <%= form_for(@journal) do |j| %>
-  
-  <%= j.hidden_field :patient_id, value: params[:patient_id] %>
-  <%= j.hidden_field :treatment_no, value: params[:treatment_no] %>
+  <% if @journal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@journal.errors.count, "error") %> prohibited this form from being saved:</h2>
 
-  <%- if @journal.treatment_no > 1 %>
+      <ul>
+      <% @journal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= j.hidden_field :patient_id, value: params[:journal][:patient_id] %>
+  <%= j.hidden_field :treatment_no, value: params[:journal][:treatment_no] %>
+
+  <%- if params[:journal][:treatment_no].to_i > 1 %>
   
   <div class="row-fluid">
     <div class="span3">
-      <h2>Date of relapse</h2>
+      <h2>Date of <%= (params[:journal][:treatment_no].to_i-1).ordinalize %> relapse</h2>
     </div>
     <div class="span6">
       <%= j.number_field :relapse_date_day, {placeholder: "day", :class => "date_generic"} %>
@@ -16,27 +27,31 @@
       <%= j.number_field :relapse_date_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
   </div>
+  <%- else %>
+    <%= j.hidden_field :relapse_date_day, value: 99 %>
+    <%= j.hidden_field :relapse_date_month, value: 99 %>
+    <%= j.hidden_field :relapse_date_year, value: 99 %>
   <%- end %>
   <div class="row-fluid">
     <div class="span3">
       <h2>Radiotherapy</h2>
     </div>
     <div style="margin-top:10px;"class="span2">
-      <%= j.select :radiotherapy, options_from_collection_for_select(NoYesUnknown.all, :id,:noyesunknown_combo, @journal.radiotherapy), {}, {"ng-model" => "journal.radiotherapy"} %> 
+      <%= j.select :radiotherapy, options_from_collection_for_select(NoYesUnknown.all, :seq,:noyesunknown_combo, @journal.radiotherapy), {include_blank: true}, {} %> 
     </div>
   </div>
 <!--Allt sem tilheyrir radiotherapy bara birt ef Yes í Radiotherapy-->  
-  <div ng-show="journal.radiotherapy == '2'">
+  <div id="radiotherapy_show">
     <div class="row-fluid">
       <div class="span3">
           <p><b>External beam radiotherapy:</b></p>
       </div>
       <div class="span2">
-        <%= j.select :externalbeamradiotherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.externalbeamradiotherapy), {}, {"ng-model" => "journal.externalbeamreadiotherapy"} %> 
+        <%= j.select :externalbeamradiotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.externalbeamradiotherapy), {include_blank: true}, {} %> 
       </div>
     </div>
   <!--Allt sem tilheyrir External beam radiotherapy birtist ef Yes í því comboi-->
-    <div ng-show="journal.externalbeamreadiotherapy == '2'">
+    <div id="externalbeamradiotherapy_show">
       <div class="row-fluid">
         <div class="span3">
           <p>Date of start:</p>
@@ -86,11 +101,11 @@
           <p><b>Brachytherapy:</b></p>
       </div>
       <div class="span2">
-        <%= j.select :brachytherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.brachytherapy), {}, {"ng-model" => "journal.brachytherapy"} %>
+        <%= j.select :brachytherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.brachytherapy), {include_blank: true}, {} %>
       </div>
     </div>
   <!--Allt sem tilheyrir Brachytherapy birtist ef Yes í því comboi-->
-    <div ng-show="journal.brachytherapy == '2'">
+    <div id="brachytherapy_show">
       <div class="row-fluid">
         <div class="span3">
           <p>Date of start:</p>
@@ -140,11 +155,11 @@
           <p><b>Internal (metabolic) radiotherapy:</b></p>
       </div>
       <div class="span2">
-        <%= j.select :internalradiotherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.internalradiotherapy), {}, {"ng-model" => "journal.internalradiotherapy"} %> 
+        <%= j.select :internalradiotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.internalradiotherapy), {include_blank: true}, {"ng-model" => "journal.internalradiotherapy"} %> 
       </div>
     </div>
   <!--Allt sem tilheyrir Internal radiotherapy birtist ef Yes í því comboi-->
-    <div ng-show="journal.internalradiotherapy == '2'">
+    <div id="internalradiotherapy_show">
       <div class="row-fluid">
         <div class="span3">
           <p>Date of start:</p>
@@ -185,11 +200,11 @@
         <h2><b>Surgery</b></h2>
     </div>
     <div class="span2" style="margin-top:10px;">
-      <%= j.select :surgery, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.surgery), {}, {"ng-model" => "journal.surgery"} %> 
+      <%= j.select :surgery, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.surgery), {include_blank: true}, {} %> 
     </div>
   </div>
   <!--Allt sem tilheyrir Surgery birtist ef Yes í því comboi-->
-  <div ng-show="journal.surgery=='2'">
+  <div id="surgery_show">
   <%= j.fields_for :surgeries do |builder| %>
     <%= render 'surgery_fields', f: builder %>
   <% end %>
@@ -202,7 +217,7 @@
         <h2><b>Chemotherapy</b></h2>
     </div>
     <div class="span2" style="margin-top:10px;">
-      <%= j.select :chemotherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.chemotherapy), {}, {"ng-model" => "journal.chemotherapy"} %> 
+      <%= j.select :chemotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.chemotherapy), {include_blank: true}, {} %> 
     </div>
   </div>
   <div class="row-fluid">
@@ -210,7 +225,7 @@
       <p class="infoSmall">and other relevant drugs (see instructions and drug codes in Appendix I)</p>
     </div>
   </div>
-  <div ng-show="journal.chemotherapy=='2'">
+  <div id="chemotherapy_show">
     <div class="row-fluid">
       <div class="span3">
         <p>Date of initiation of chemotherapy:</p>
@@ -260,9 +275,10 @@
           <p>Was body surface estimated?</p>
       </div>
       <div class="span2">
-          <%= j.select :chemotherapyestimated, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %> 
+          <%= j.select :chemotherapyestimated, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
       </div>
     </div>
+    <hr>
       <%= j.fields_for :chemo_therapies do |builder| %>
         <%= render 'chemo_therapy_fields', f: builder %>
       <% end %>
@@ -288,15 +304,21 @@
     <br><br><br>
     <div class="row-fluid">
       <div class="span12">
+        <p class="infoSmallRed">Please note that cumulative doses of intrathecal drugs (e.g. MTX it.) are in <b>mg</b> only, not per m<sup>2<sup></p>
+      </div>
+      <div class="span12">
         <p class=infoBox><b>In case of anthracycline use:</b><br>**Please give the average rate of administration for the <b>majority</b> of anthracycline doses given.<br>Anthracyclines: <b>doxorubicin</b>, Adriamycin&reg;, Adria&reg;; <b>daunorubicin</b>, Daunomycin&reg;, Cerubidine&reg;; <b>idarubicin</b>, Idamycin&reg;; mitoxantrone, Novantrone&reg;; <b>epirubicine</b><br>
-        </p>
+        <br>
+
+        <strong>Were cardioprotectants used?</strong>&nbsp;(Cardioprotectants: Cardioxane, Zinecard or DexrazOxane)
+        <br>
+        <span class="span2">
+        <%= j.select :chemocardioprotectants, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), {include_blank: true}, {} %>
+      </span>
+      
+    <br><br></p>
       </div>
-      <div class="span3">
-        <p>Were cardioprotectants used?</p>
-      </div>
-      <div class="span2">
-        <%= j.select :chemocardioprotectants, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), {}, {"ng-model" => "journal.chemocardioprotectants"} %>
-      </div>
+      
     </div>
     <div class="row-fluid">
       <div class="span8 offset3">
@@ -320,7 +342,7 @@
         <p>CVC inserted?</p>
       </div>
       <div class="span2">
-        <%= j.select :chemotherapyCVC, options_from_collection_for_select(NoYesUnknown.all, :id,:noyesunknown_combo, @journal.chemotherapyCVC), {}, {"ng-model" => "journal.chemotherapyCVC"} %> 
+        <%= j.select :chemotherapyCVC, options_from_collection_for_select(NoYesUnknown.all, :seq,:noyesunknown_combo, @journal.chemotherapyCVC), {include_blank: true}, {} %> 
       </div>
     </div>
     <div ng-show="journal.chemotherapyCVC=='2'">
@@ -359,10 +381,10 @@
         <h2><b>Bone marrow transplantation</b></h2><p class="infoSmall" style="margin-top:-20px;">(BMT, Stem cell transplant, SCT)</p>
     </div>
     <div class="span2" style="margin-top:10px;">
-      <%= j.select :bonemarrowtransplantation, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, @journal.bonemarrowtransplantation), {}, {"ng-model" => "journal.bonemarrowtransplantation"} %> 
+      <%= j.select :bonemarrowtransplantation, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, @journal.bonemarrowtransplantation), {include_blank: true}, {} %> 
     </div>
   </div>
-  <div ng-show="journal.bonemarrowtransplantation == '2'">
+  <div id="bonemarrowtransplantation_show">
   <%= j.fields_for :bone_marrow_transplantations do |builder| %>
   <%= render 'bone_marrow_transplantation_fields', f: builder %>
   <% end %>

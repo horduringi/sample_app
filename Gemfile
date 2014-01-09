@@ -34,6 +34,7 @@ gem 'uglifier', '1.2.3'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-inputmask-rails'
 
 group :test do
 	gem 'capybara', '1.1.2'

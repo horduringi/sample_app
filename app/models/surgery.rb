@@ -1,6 +1,12 @@
 class Surgery < ActiveRecord::Base
   attr_accessible *column_names, :surgerycompleteremovalorgan, :surgerycompleteremovalorganlaterality, :surgerycompleteremovalorganspec, :surgerydate, :surgeryradicality, :surgerytype, :journal_id
   belongs_to :journal
+
+  validates_presence_of :surgerydate_day, :surgerydate_month, :surgerydate_year, :surgerytype, :surgeryradicality, :surgerycompleteremovalorganspec
+  validates_presence_of :surgerycompleteremovalorganlaterality, :if => :surgerycompleteremoval?
+  def surgerycompleteremoval?
+    Array(1..6).include? surgerycompleteremovalorganspec
+  end
   def self.get_values(id)
     row = []
     j = Surgery.find(id)

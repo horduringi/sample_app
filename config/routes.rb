@@ -2,6 +2,8 @@ SampleApp::Application.routes.draw do
   
 
 
+  devise_for :admins
+
   resources :cytostatic_drug_given_bone_marrows
 
 

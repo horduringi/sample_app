@@ -39,7 +39,7 @@
         <p>Was body surface estimated?</p>
     </div>
     <div class="span2">
-        <%= f.select :estimated, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %> 
+        <%= f.select :estimated, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
     </div>
   </div>
     <%= f.hidden_field :_destroy %>

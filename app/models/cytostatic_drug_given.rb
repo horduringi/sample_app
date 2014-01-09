@@ -1,7 +1,13 @@
 class CytostaticDrugGiven < ActiveRecord::Base
-  attr_accessible *column_names, :bone_marrow_transplantation_id, :anthracyclinesbolusinf, :anthracyclinesbolusinfnoyes, :cardioprotectants, :chemoorbonemarrow, :cytostaticdrugid, :dosequality, :journal_id, :totalcumulateddosemg, :totalcumulateddoseunits
+  attr_accessible *column_names, :bone_marrow_transplantation_id, :anthracyclinesbolusinf, :anthracyclinesbolusinfnoyes, :chemoorbonemarrow, :cytostaticdrugid, :dosequality, :journal_id, :totalcumulateddosemg, :totalcumulateddoseunits
   belongs_to :journal
   belongs_to :bone_marrow_transplantation
+
+  validates_presence_of :cytostaticdrugid, :totalcumulateddosemg, :dosequality
+  validates_presence_of :anthracyclinesbolusinf, :if => :anthracycline?
+  def anthracycline?
+    [302, 304, 307, 310].include? cytostaticdrugid
+  end
   def self.get_values(id)
     row = []
     j = CytostaticDrugGiven.find(id)

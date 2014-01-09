@@ -35,3 +35,5 @@ end
   p.is_done = false
   p.save
 end
+
+User.create(email: "test@test.dk", password: "test.123", admin:true, institute_id: 1, name: "Test user")

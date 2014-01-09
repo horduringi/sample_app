@@ -15,7 +15,7 @@
       <p>Autologous</p>
     </div>
     <div class="span2">
-      <%= f.select :autologous, options_from_collection_for_select(NoYes.all, :id,:noyes_combo, ), :include_blank => true %> 
+      <%= f.select :autologous, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, ), :include_blank => true %> 
     </div>
   </div>
   <div class="row-fluid">
@@ -23,7 +23,7 @@
       <p>Allogeneic</p>
     </div>
     <div class="span2">
-      <%= f.select :allogeneic, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %> 
+      <%= f.select :allogeneic, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
     </div>
   </div>
   <div class="row-fluid">
@@ -31,7 +31,7 @@
       <p>Donor</p>
     </div>
     <div class="span2">
-      <%= f.select :donor, options_from_collection_for_select(Donor.all, :id,:donor_combo), :include_blank => true %> 
+      <%= f.select :donor, options_from_collection_for_select(Donor.all, :seq,:donor_combo), :include_blank => true %> 
     </div>
   </div>  
   <div class="row-fluid">
@@ -39,7 +39,7 @@
       <p>Source</p>
     </div>
     <div class="span2">
-      <%= f.select :source, options_from_collection_for_select(Source.all, :id,:source_combo), :include_blank => true %> 
+      <%= f.select :source, options_from_collection_for_select(Source.all, :seq,:source_combo), :include_blank => true %> 
     </div>
   </div>
   <div class="row-fluid">
@@ -55,7 +55,7 @@
       <p>Total body irritation (TBI):</p>
     </div>
     <div class="span2">
-      <%= f.select :totalbodyirritation, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %> 
+      <%= f.select :totalbodyirritation, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
     </div>
   </div>
   <div class="row-fluid">
@@ -83,7 +83,7 @@
       <p>Radiotherapy records copied:</p>
     </div>
     <div class="span2">
-      <%= f.select :radiotherapyrecordscopied, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %>
+      <%= f.select :radiotherapyrecordscopied, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %>
     </div>
   </div>
   <br>
@@ -92,7 +92,7 @@
       <b>Chemotherapy (conditioning)</b>
     </div>
     <div class="span2">
-      <%= f.select :chemotherapy, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %>
+      <%= f.select :chemotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %>
     </div>
   </div>
   <div class="row-fluid">
@@ -161,13 +161,17 @@
 
   <br>
   <br>
-  <div class="row-fluid">
-    <div class="span4">
-      <p>Were cardioprotectants used?</p>
-    </div>
-    <div class="span2">
-      <%= f.select :cardioprotectants, options_from_collection_for_select(NoYes.all, :id,:noyes_combo), :include_blank => true %>
-    </div>
+  <div class="span12">
+    <p class=infoBox><b>In case of anthracycline use:</b><br>**Please give the average rate of administration for the <b>majority</b> of anthracycline doses given.<br>Anthracyclines: <b>doxorubicin</b>, Adriamycin&reg;, Adria&reg;; <b>daunorubicin</b>, Daunomycin&reg;, Cerubidine&reg;; <b>idarubicin</b>, Idamycin&reg;; mitoxantrone, Novantrone&reg;; <b>epirubicine</b><br>
+    <br>
+
+    <strong>Were cardioprotectants used?</strong>&nbsp;(Cardioprotectants: Cardioxane, Zinecard or DexrazOxane)
+    <br>
+    <span class="span2">
+    <%= f.select :cardioprotectants, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), include_blank: true %>
+  </span>
+  
+<br><br></p>
   </div>
   <div class="row-fluid">
     <div class="span8 offset4">

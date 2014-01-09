@@ -69,10 +69,13 @@ class PatientsController < ApplicationController
   # PUT /patients/1.json
   def update
     @patient = Patient.find(params[:id])
+    new_params = {:journal => { patient_id: params[:id], treatment_no: 1 } }
     if params[:commit] == "Next"
-      redirect_path = new_journal_path(patient_id: params[:id], treatment_no: 1)
+      redirect_path = new_journal_path(new_params)
+      action_path = "edit"
     else
-      redirect_path = "/edit"
+      redirect_path = "/"
+      action_path = "edit_remission"
     end
     #@patient.user_id = current_user.id
     #@patient.save
@@ -86,7 +89,7 @@ class PatientsController < ApplicationController
         format.html { redirect_to redirect_path }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: action_path }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end
     end

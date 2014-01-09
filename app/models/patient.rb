@@ -18,9 +18,16 @@ class Patient < ActiveRecord::Base
   validates_presence_of :germcelltumorsandgonadalstumorstype, :germcelltumorsandgonadaltumorslaterality, :germcellandgonadalstumorsmetastasisatdiagnosis, :if => :first_germcelltumorsandgonadalstumorstype?
   validates_presence_of :othertumortype, :otherprimarytumorsite, :if => :first_othertumortype?
 
-  validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :in => Array(1..31) + [99]
-  validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :in => Array(1..12) + [99]
-  validates_inclusion_of :radiorecordscopied_year, :dateofdiagnosis_year, :in => Array(1970..2013) + [99]
+  validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :lastdoctorsvisit_day, :in => Array(1..31) + [99] + [nil]
+  validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :lastdoctorsvisit_month, :in => Array(1..12) + [99] + [nil]
+  validates_inclusion_of :radiorecordscopied_year, :dateofdiagnosis_year, :lastdoctorsvisit_year, :in => Array(1970..2013) + [99] + [nil]
+
+  validates_presence_of :lastdoctorsvisit_day, :lastdoctorsvisit_month, :lastdoctorsvisit_year, :lastdoctorsvisitstatus, :if => :is_done?
+
+  def is_done?
+    is_done
+  end
+
   def first_leukemia?
     firstprimcancertype == 1
   end

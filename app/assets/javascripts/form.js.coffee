@@ -21,7 +21,7 @@ jQuery ->
 
 app = angular.module("formApp",['ui.select2'])
 app.controller "FormCtrl", ($scope) ->
-  $scope.journal = gon.journal
+  #$scope.journal = gon.journal
   $("#journal_cytostatic_drug_given_cytostaticdrugid").select2()
   #$("#journal_cytostatic_drug_given_dosequality").select2()
   #$("#journal_cytostatic_drug_given_anthracyclinesbolusinf").select2()

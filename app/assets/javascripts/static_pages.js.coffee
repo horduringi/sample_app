@@ -16,7 +16,7 @@ app.controller "MyCtrl", ($scope) ->
     async: false
   ).responseText), "studynumber")
   $scope.myDataNotDone = $scope.myData.filter((el) ->
-      el.is_done == false)
+      el.is_done != true)
   $scope.myDataDone = $scope.myData.filter((el) ->
       el.is_done == true)
   $scope.gridOptions = 
