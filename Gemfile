@@ -51,4 +51,6 @@ gem "gon"
 
 gem 'rack-mini-profiler'
 
+gem 'therubyracer'
+
 ruby '2.0.0'
