@@ -1,35 +1,36 @@
 
 
   <% if user_signed_in? %>
-  
-<div ng-controller="MyCtrl" ng-app="myApp">
-  <div class="row-fluid">
-    <div class="span6" align="center">
-      <h2 style="text-align:center">Select an ALiCCS-study number</h2>
-      <input align="center" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText" style="width:200px;"/>
-      <div class="gridStyle" ng-grid="gridOptions"></div>
-      Total: {{myDataNotDone.length}}
-    </div>
-    <div class="span6" align="center">
-      <h2 style="text-align:center">Done</h2>
-      <input align="center" placeholder="Search..." ng-model="gridOptionsDone.filterOptions.filterText" style="width:200px;"/>
-      <div class="gridStyle" ng-grid="gridOptionsDone"></div>
-      Total: {{myDataDone.length}}
-      <% if current_user.admin %>
-  <p>
-  Download CSV:
-  <%= link_to "Patients", patients_path(format: "csv") %> | <%= link_to "Treatments", journals_path(format: "csv") %> | <%= link_to "Surgeries", surgeries_path(format: "csv") %> | <%= link_to "BoneMarrowTransplantations", bone_marrow_transplantations_path(format: "csv") %> | <%= link_to "ChemoTherapies", chemo_therapies_path(format: "csv") %> | <%= link_to "CytostaticDrugGivens", cytostatic_drug_givens_path(format: "csv") %> | <%= link_to "CytostaticDrugGivenBoneMarrows", cytostatic_drug_given_bone_marrows_path(format: "csv") %>
-  </p>
-<% end %> 
-    </div>
-  </div>
-  <div class="row-fluid">
-    <br>
-    <br>
-    <div class="progress span10 offset1">
-      <div class="bar" style="width:<%= @progress %>%">
+<div ng-app="myApp">
+  <div ng-controller="MyCtrl">
+    <div class="row-fluid">
+      <div class="span6" align="center">
+        <h2 style="text-align:center">Select an ALiCCS-study number</h2>
+        <input align="center" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText" style="width:200px;"/>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
+        Total: {{myDataNotDone.length}} {{1 + 2}}
       </div>
+      <div class="span6" align="center">
+        <h2 style="text-align:center">Done</h2>
+        <input align="center" placeholder="Search..." ng-model="gridOptionsDone.filterOptions.filterText" style="width:200px;"/>
+        <div class="gridStyle" ng-grid="gridOptionsDone"></div>
+        Total: {{myDataDone.length}}
+        <% if current_user.admin %>
+    <p>
+    Download CSV:
+    <%= link_to "Patients", patients_path(format: "csv") %> | <%= link_to "Treatments", journals_path(format: "csv") %> | <%= link_to "Surgeries", surgeries_path(format: "csv") %> | <%= link_to "BoneMarrowTransplantations", bone_marrow_transplantations_path(format: "csv") %> | <%= link_to "ChemoTherapies", chemo_therapies_path(format: "csv") %> | <%= link_to "CytostaticDrugGivens", cytostatic_drug_givens_path(format: "csv") %> | <%= link_to "CytostaticDrugGivenBoneMarrows", cytostatic_drug_given_bone_marrows_path(format: "csv") %>
+    </p>
+  <% end %> 
+      </div>
+    </div>
+    <div class="row-fluid">
+      <br>
+      <br>
+      <div class="progress span10 offset1">
+        <div class="bar" style="width:<%= @progress %>%">
+        </div>
 
+      </div>
     </div>
   </div>
 </div>

@@ -1,8 +1,8 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-app = angular.module("patientApp",['ui.select2'])
-app.controller "PatientCtrl", ($scope) ->
+patientApp = angular.module("patientApp",['ui.select2'])
+patientApp.controller "PatientCtrl", ($scope) ->
   #$scope.patient = gon.patient
   $("#journal_cytostatic_drug_given_cytostaticdrugid").select2()
   #$("#journal_cytostatic_drug_given_dosequality").select2()

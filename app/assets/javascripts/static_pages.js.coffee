@@ -1,8 +1,8 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-app = angular.module("myApp", ["ngGrid"])
-app.controller "MyCtrl", ($scope) ->
+myApp = angular.module("myApp", ["ngGrid"])
+myApp.controller "MyCtrl", ($scope) ->
   sortByKey = (array, key) ->
     array.sort (a, b) ->
       x = a[key]

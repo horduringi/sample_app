@@ -5,7 +5,7 @@ $(document).ready ->
   re = /^\d*,?\d*$/
   $(".number_field").change (event) ->
     unless $(this).val().match(re)
-      alert "Comma must be used as a decimal separator."
+      alert "Wrong input:\nOnly use digits and if a decimal separator is appropriate, comma must be used as a decimal separator."
       $(this).val('')
   #$(".number_field").blur ([data], event) ->
   #  if $(this).val().search(\.) isnt -1

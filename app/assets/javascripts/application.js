@@ -19,10 +19,8 @@
 //= require jquery.inputmask.date.extensions
 //= require underscore
 //= require angular
-//= require angular-resource
 //= require angular-ui-select2
 //= require ng-grid
-//= require static_pages
 //= require bootstrap
 //= require input_checker
 //= require_tree .

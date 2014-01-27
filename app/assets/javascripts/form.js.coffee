@@ -19,8 +19,8 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
-app = angular.module("formApp",['ui.select2'])
-app.controller "FormCtrl", ($scope) ->
+formApp = angular.module("formApp",['ui.select2'])
+formApp.controller "FormCtrl", ($scope) ->
   #$scope.journal = gon.journal
   $("#journal_cytostatic_drug_given_cytostaticdrugid").select2()
   #$("#journal_cytostatic_drug_given_dosequality").select2()
