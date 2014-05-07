@@ -9,7 +9,7 @@ class PatientsController < ApplicationController
     end
     respond_to do |format|
       format.html # index.html.erb
-      format.csv { send_data @patients.to_csv({col_sep: ","}) }
+      format.csv { send_data @patients.to_csv({col_sep: "#"}) }
       format.json { render json: @patients }
     end
   end
@@ -56,10 +56,10 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
+        format.html { redirect_to '/', notice: 'Patient was successfully created.' }
         format.json { render json: @patient, status: :created, location: @patient }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to '/', notice: 'Error. Patient was not created.' }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end
     end
@@ -98,11 +98,17 @@ class PatientsController < ApplicationController
   # DELETE /patients/1
   # DELETE /patients/1.json
   def destroy
-    @patient = Patient.find(params[:id])
+    #Patient.where(country: 5).destroy_all
+
+    @patient = Patient.find(params[:patient][:id])
     @patient.destroy
 
+    #@journals = Journal.where(patient_id: params[:patient][:id])
+    #for @j in @journals
+    #  @j.destroy
+
     respond_to do |format|
-      format.html { redirect_to patients_url }
+      format.html { redirect_to '/'}
       format.json { head :no_content }
     end
   end

@@ -11,7 +11,7 @@ class BoneMarrowTransplantationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bone_marrow_transplantations }
-      format.csv { send_data @bone_marrow_transplantations.to_csv({col_sep: ","}) }
+      format.csv { send_data @bone_marrow_transplantations.to_csv({col_sep: "#"}) }
     end
   end
 

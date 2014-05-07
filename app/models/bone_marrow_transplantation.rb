@@ -1,8 +1,8 @@
 class BoneMarrowTransplantation < ActiveRecord::Base
   attr_accessible *column_names, :cytostatic_drug_given_bone_marrow_attributes, :cytostatic_drug_given_attributes, :allogeneic, :autologous, :bodysurfaceconditioning, :chemotherapy, :chemotherapydateofcompletion, :chemotherapydateofinitiation, :completiondate, :cumulativedose, :donor, :heightconditioning, :numberoffractions, :radiotherapyrecordscopied, :journal_id, :source, :startdate, :totalbodyirritation, :transplantationdate, :transplantationnumber, :weightconditioning
-  belongs_to :journal
-  has_many :cytostatic_drug_given
-  has_many :cytostatic_drug_given_bone_marrow
+  belongs_to :journal, dependent: :destroy
+  has_many :cytostatic_drug_given, dependent: :destroy
+  has_many :cytostatic_drug_given_bone_marrow, dependent: :destroy
   accepts_nested_attributes_for :cytostatic_drug_given, allow_destroy: true
   accepts_nested_attributes_for :cytostatic_drug_given_bone_marrow, allow_destroy: true
 
@@ -11,7 +11,7 @@ class BoneMarrowTransplantation < ActiveRecord::Base
 
   validates_inclusion_of :transplantationdate_day, :startdate_day, :completiondate_day, :chemotherapydateofinitiation_day, :chemotherapydateofcompletion_day, :in => Array(1..31) + [99] + [nil]
   validates_inclusion_of :transplantationdate_month, :startdate_month, :completiondate_month, :chemotherapydateofinitiation_month, :chemotherapydateofcompletion_month, :in => Array(1..12) + [99] + [nil]
-  validates_inclusion_of :transplantationdate_year, :startdate_year, :completiondate_year, :chemotherapydateofinitiation_year, :chemotherapydateofcompletion_year, :in => Array(1970..2013) + [99] + [nil]
+  validates_inclusion_of :transplantationdate_year, :startdate_year, :completiondate_year, :chemotherapydateofinitiation_year, :chemotherapydateofcompletion_year, :in => Array(1970..2100) + [99] + [nil]
 
   def chemo_therapy?
     chemotherapy == 2

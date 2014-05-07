@@ -272,7 +272,7 @@
     </div>
     <div class="row-fluid">
       <div class="span3">
-          <p>Was body surface estimated?</p>
+          <p>Was body surface estimated using a growth chart?</p>
       </div>
       <div class="span2">
           <%= j.select :chemotherapyestimated, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
@@ -304,7 +304,7 @@
     <br><br><br>
     <div class="row-fluid">
       <div class="span12">
-        <p class="infoSmallRed">Please note that cumulative doses of intrathecal drugs (e.g. MTX it.) are in <b>mg</b> only, not per m<sup>2<sup></p>
+        <p class="infoSmallRed">Please note that cumulative doses of intrathecal drugs (e.g. MTX it.) are registered in <b>mg/m<sup>2<sup></b></p>
       </div>
       <div class="span12">
         <p class=infoBox><b>In case of anthracycline use:</b><br>**Please give the average rate of administration for the <b>majority</b> of anthracycline doses given.<br>Anthracyclines: <b>doxorubicin</b>, Adriamycin&reg;, Adria&reg;; <b>daunorubicin</b>, Daunomycin&reg;, Cerubidine&reg;; <b>idarubicin</b>, Idamycin&reg;; mitoxantrone, Novantrone&reg;; <b>epirubicine</b><br>
@@ -342,15 +342,16 @@
         <p>CVC inserted?</p>
       </div>
       <div class="span2">
-        <%= j.select :chemotherapyCVC, options_from_collection_for_select(NoYesUnknown.all, :seq,:noyesunknown_combo, @journal.chemotherapyCVC), {include_blank: true}, {} %> 
+        <%= j.select :chemotherapyCVC, options_from_collection_for_select(NoYesUnknown.all, :seq,:noyesunknown_combo, @journal.chemotherapyCVC), {include_blank: true}, {"ng-model" => "journal.chemotherapyCVC"} %> 
       </div>
     </div>
-    <div ng-show="journal.chemotherapyCVC=='2'">
+    <div ng-show="journal.chemotherapyCVC=='1'">
       <div class="row-fluid">
         <div class="span4">
           <p>If yes, how many in total were inserted during the treatment period?</p>
         </div>
         <div class="span2">
+          <%= j.number_field :chemotherapynumberofcvc, { step: 1, min: 0} %>
           <!--Athuga-->
         </div>
       </div>

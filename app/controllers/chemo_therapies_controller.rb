@@ -11,7 +11,7 @@ class ChemoTherapiesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @chemo_therapies }
-      format.csv {send_data @chemo_therapies.to_csv({col_sep: ","}) }
+      format.csv {send_data @chemo_therapies.to_csv({col_sep: "#"}) }
     end
   end
 

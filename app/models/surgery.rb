@@ -1,6 +1,6 @@
 class Surgery < ActiveRecord::Base
   attr_accessible *column_names, :surgerycompleteremovalorgan, :surgerycompleteremovalorganlaterality, :surgerycompleteremovalorganspec, :surgerydate, :surgeryradicality, :surgerytype, :journal_id
-  belongs_to :journal
+  belongs_to :journal, dependent: :destroy
 
   validates_presence_of :surgerydate_day, :surgerydate_month, :surgerydate_year, :surgerytype, :surgeryradicality, :surgerycompleteremovalorganspec
   validates_presence_of :surgerycompleteremovalorganlaterality, :if => :surgerycompleteremoval?

@@ -9,6 +9,34 @@
         <input align="center" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText" style="width:200px;"/>
         <div class="gridStyle" ng-grid="gridOptions"></div>
         Total: {{myDataNotDone.length}}
+        <% if current_user.admin %>
+        <h4>
+          Create a new study number
+        </h4>
+          <%= form_for(Patient.new) do |p| %>
+          <div class="form-inline" role="form">
+              <!--input id="studynumber" name="studynumber" class="form-control" style="width:120px" placeholder="Study number"/-->
+              <%= p.text_field :studynumber, style: "width: 120px;" %>
+              <%= p.select :country, options_from_collection_for_select(Country.all, :id, :countryname), {include_blank: true}, {class: "form-control", style: "width:100px"} %>
+              <%= p.submit "Create", class: "btn btn-primary form-control" %>
+          </div>
+          <% end %>
+        <h4>
+          Delete a study number
+        </h4>
+        <%= form_for(:patient, url: "/patients", html: {method: :delete}) do |p| %>
+        <div class="form-inline" role="form">
+          <%= p.select :id, options_from_collection_for_select(Patient.all, :id, :studynumber), {include_blank: true}, {class: "form-control", style: "width: 120px;"} %>
+          <%= p.submit "Delete", class: "btn btn-danger form-control" %>
+        </div>
+        <% end %>
+        <!--div>
+          <%= button_to "Delete swedes", {:controller => :patients, :action => 'destroy', :id => 1 }, {:method => :delete, class: "btn btn-danger" } %>
+        </div-->
+        <% end %>
+      </div>
+      <div>
+        
       </div>
       <div class="span6" align="center">
         <h2 style="text-align:center">Done</h2>
@@ -18,7 +46,7 @@
         <% if current_user.admin %>
     <p>
     Download CSV:
-    <%= link_to "Patients", patients_path(format: "csv") %> | <%= link_to "Treatments", journals_path(format: "csv") %> | <%= link_to "Surgeries", surgeries_path(format: "csv") %> | <%= link_to "BoneMarrowTransplantations", bone_marrow_transplantations_path(format: "csv") %> | <%= link_to "ChemoTherapies", chemo_therapies_path(format: "csv") %> | <%= link_to "CytostaticDrugGivens", cytostatic_drug_givens_path(format: "csv") %> | <%= link_to "CytostaticDrugGivenBoneMarrows", cytostatic_drug_given_bone_marrows_path(format: "csv") %>
+    <%= link_to "Patients", patients_path(format: "csv") %> | <%= link_to "Journals", journals_path(format: "csv") %> | <%= link_to "Surgeries", surgeries_path(format: "csv") %> | <%= link_to "BoneMarrowTransplantations", bone_marrow_transplantations_path(format: "csv") %> | <%= link_to "ChemoTherapies", chemo_therapies_path(format: "csv") %> | <%= link_to "CytostaticDrugGivens", cytostatic_drug_givens_path(format: "csv") %> | <%= link_to "CytostaticDrugGivenBoneMarrows", cytostatic_drug_given_bone_marrows_path(format: "csv") %>
     </p>
   <% end %> 
       </div>

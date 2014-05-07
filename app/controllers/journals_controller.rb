@@ -10,7 +10,7 @@ class JournalsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @journals }
-      format.csv { send_data @journals.to_csv({col_sep: ","}) }
+      format.csv { send_data @journals.to_csv({col_sep: "#"}) }
     end
   end
   def create
@@ -38,7 +38,8 @@ class JournalsController < ApplicationController
     gon.journal = @journal
     
     if params[:commit] == "Add relapse"
-      redirect_path = new_journal_path(patient_id: @journal.patient_id, treatment_no: @journal.treatment_no)
+      new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no + 1 } }
+      redirect_path = new_journal_path(new_params)
     else
       redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
     end
@@ -63,7 +64,13 @@ class JournalsController < ApplicationController
     end
   end
   def new
-    @journal = Journal.new
+    #check if one exists
+    j = Journal.where(patient_id: params[:journal][:patient_id]).where(treatment_no: params[:journal][:treatment_no]).first
+    if j
+      @journal = j
+    else
+      @journal = Journal.new
+    end
     gon.journal = @journal
 
     # Where there is possible to add there should be one by default

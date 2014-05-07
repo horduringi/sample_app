@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
     @progress = (Patient.where(is_done: true).count.to_f / Patient.all.count.to_f) * 100
   end
 
+
   def help
   end
 

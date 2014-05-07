@@ -37,7 +37,7 @@
         <p>Gender:</p>
     </div>
     <div class="span2">
-        <%= j.select :gender_id, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender_id), {include_blank: true}, {} %>
+        <%= j.select :gender_id, options_from_collection_for_select(Gender.all, :id, :gender_combo, @patient.gender_id), {include_blank: true}, {style: "font-size: 90%;"} %>
     </div>
   </div>
   <br>

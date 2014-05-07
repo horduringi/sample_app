@@ -1,6 +1,6 @@
 class ChemoTherapy < ActiveRecord::Base
   attr_accessible *column_names, :treatmentprotocol, :bodysurface, :height, :measurementdate, :journal_id, :weight, :yearnumber, :estimated
-  belongs_to :journal
+  belongs_to :journal, dependent: :destroy
 
   validates_presence_of :bodysurface, :measurementdate_day, :measurementdate_month, :measurementdate_year, :weight, :height, :estimated
   def self.get_values(id)

@@ -1,5 +1,5 @@
 class Institute < ActiveHash::Base
-  self.data = [{ id: 1, initials: "KB", name: "Kreftens bekæmpelse, Danish Cancer Society Research Center", address: "København"},
+  self.data = [{ id: 1, initials: "KB", name: "Kræftens bekæmpelse, Danish Cancer Society Research Center", address: "København"},
                { id: 2, initials: "AUH", name: "Århus University Hospital", address: "Århus/Skejby"},
                { id: 3, initials: "TYKS", name: "Turku University Hospital", address: "Turku"},
                { id: 4, initials: "FCR", name: "Finnish Cancer Registry", address: "Helsinki"},

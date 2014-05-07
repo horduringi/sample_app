@@ -8,7 +8,7 @@ SampleApp::Application.routes.draw do
 
 
   devise_for :users
-
+  match '/patients', to: 'patients#destroy', via: 'delete'
   resources :patients
   match '/patients/:id/edit_remission', to: 'patients#edit_remission', via: 'get'
 

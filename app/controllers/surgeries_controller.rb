@@ -11,7 +11,7 @@ class SurgeriesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @surgeries }
-      format.csv { send_data @surgeries.to_csv({col_sep: ","}) }
+      format.csv { send_data @surgeries.to_csv({col_sep: "#"}) }
     end
   end
 
