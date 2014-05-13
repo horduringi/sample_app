@@ -46,6 +46,7 @@ class PatientsController < ApplicationController
 
   def edit_remission
     @patient = Patient.find(params[:id])
+    @no_of_treatments = params[:no_of_treatments]
     gon.patient = @patient
   end
 

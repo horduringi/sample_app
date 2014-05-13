@@ -31,11 +31,11 @@
       <p>Status at last doctor visit:</p>
     </div>
     <div class="span6">
-      <%= j.select :lastdoctorsvisitstatus, options_from_collection_for_select(LastDoctorsVisitStatus.all, :seq,:lastdoctorsvisitstatus_combo,@patient.lastdoctorsvisitstatus), {include_blank: :true}, {"ng-model" => "patient.lastdoctorsvisitstatus"} %> 
+      <%= j.select :lastdoctorsvisitstatus, options_from_collection_for_select(LastDoctorsVisitStatus.all, :seq, :lastdoctorsvisitstatus_combo, @patient.lastdoctorsvisitstatus), {include_blank: :true}, {} %> 
     </div>
   </div>
   <!--Sýna ef ,,Permanent complications valið í combo fyrir ofan-->
-  <div class="row-fluid" ng-show="patient.lastdoctorsvisitstatus == '1'">
+  <div class="row-fluid" id="lastdoctorsvisitstatus_show">
     <div class="span3">
         <p>If permanent complications, please specify in free text and note any disabilities:</p>
     </div>
@@ -49,4 +49,10 @@
   </div>
       
       <% end %>
+    <a href="/journals/new?journal%5Bpatient_id%5D=<%= @patient.id %>&journal%5Btreatment_no%5D=<%= @no_of_treatments %>" style="position:relative;top:-70px">
+      <button class="btn btn-large">
+        Back
+      </button>
+    </a>
+
 </div>

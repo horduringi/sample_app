@@ -16,19 +16,25 @@ class JournalsController < ApplicationController
   def create
     @journal = Journal.new(params[:journal])
     gon.journal = @journal
-    if params[:commit] == "Add relapse"
+    if params[:commit] == "Add relapse" or params[:commit] == "Next relapse"
       new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no + 1 } }
       redirect_path = new_journal_path(new_params)
+      error_new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no } }
+      error_redirect_path = new_journal_path(error_new_params)
     else
-      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
+      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission?no_of_treatments=" + @journal.treatment_no.to_s
     end
+
+    @patient_id = params[:journal][:patient_id]
+    @treatment_no = params[:journal][:treatment_no]
 
     respond_to do |format|
       if @journal.save
         format.html { redirect_to redirect_path, notice: 'Journal was successfully created.' }
         format.json { render json: @journal, status: :created, location: @journal }
       else
-        format.html { render action: "new" }
+        #format.html { redirect_to error_redirect_path }
+        format.html {render action: "new" }
         format.json { render json: @journal.errors, status: :unprocessable_entity }
       end
     end
@@ -37,11 +43,13 @@ class JournalsController < ApplicationController
     @journal = Journal.find(params[:id])
     gon.journal = @journal
     
-    if params[:commit] == "Add relapse"
+    if params[:commit] == "Add relapse" or params[:commit] == "Next relapse"
       new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no + 1 } }
       redirect_path = new_journal_path(new_params)
+      error_new_params = {:journal => { patient_id: params[:journal][:patient_id], treatment_no: @journal.treatment_no } }
+      error_redirect_path = new_journal_path(error_new_params)
     else
-      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission"
+      redirect_path = "/patients/" + @journal.patient_id.to_s +  "/edit_remission?no_of_treatments=" + @journal.treatment_no.to_s
     end
     
     respond_to do |format|
@@ -49,7 +57,8 @@ class JournalsController < ApplicationController
         format.html { redirect_to redirect_path }# show.html.erb
         format.json { head :no_content }
       else
-        format.html { render action: "edit"}
+        format.html { redirect_to error_redirect_path }
+        #format.html { render action: "edit", alert: "Could not be saved, because of errors in the form." }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end
       
@@ -72,7 +81,10 @@ class JournalsController < ApplicationController
       @journal = Journal.new
     end
     gon.journal = @journal
-
+    if !@patient_id
+      @patient_id = params[:journal][:patient_id]
+      @treatment_no = params[:journal][:treatment_no]
+    end
     # Where there is possible to add there should be one by default
     #@bone_marrow_transplantation = BoneMarrowTransplantation.create(journal_id: @journal.id)
     #ChemoTherapy.create(journal_id: @journal.id)

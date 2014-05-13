@@ -394,13 +394,33 @@
   </div>
 
     <div align="right">
+        <%- if Journal.where(patient_id: @patient_id).where(treatment_no: (@treatment_no.to_i + 1).to_s ).count == 0 %>
         <%= j.submit "Add relapse", class: "btn btn-large btn-primary" %>
-        <%- if @journal.treatment_no == 1 %>
-        <%= j.submit "No relapses", class: "btn btn-large" %>
         <%- else %>
-        <%= j.submit "No more relapses", class: "btn btn-large" %>
+        <%= j.submit "Next relapse", class: "btn btn-large btn-primary" %>
+        <% end %>
+        <%- if Journal.where(patient_id: @patient_id).where("treatment_no = ?", (@treatment_no.to_i + 1.to_i).to_s ).count == 0 %>
+          <%- if @journal.treatment_no == 1 %>
+          <%= j.submit "No relapses", class: "btn btn-large" %>
+          <%- else %>
+          <%= j.submit "No more relapses", class: "btn btn-large" %>
+          <%- end %>
         <%- end %>
   </div>
       
       <% end %>
+  <%- if @journal.treatment_no == 1 %>
+
+  <a href="/patients/<%= @journal.patient_id %>/edit" style="position:relative;top:-70px">
+    <button class="btn btn-large">
+      Back
+    </button>
+  </a>
+  <%- else %>
+  <a href="/journals/new?journal%5Bpatient_id%5D=<%= @patient_id %>&journal%5Btreatment_no%5D=<%= @treatment_no.to_i - 1 %>" style="position:relative;top:-70px">
+    <button class="btn btn-large">
+      Back
+    </button>
+  </a>
+  <%- end %>
 </div>

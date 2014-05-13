@@ -19,6 +19,18 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
+$(document).ready ->
+  hide_and_seek("#patient_lastdoctorsvisitstatus", "#lastdoctorsvisitstatus_show", "1")
+  $("#patient_lastdoctorsvisitstatus").change ->
+    hide_and_seek("#patient_lastdoctorsvisitstatus", "#lastdoctorsvisitstatus_show", "1")
+
+hide_and_seek = (master, slave, show_value) ->
+  selected = $(master + " option:selected")
+  if selected.val() == show_value
+    $(slave).show()
+  else
+    $(slave).hide()
+
 formApp = angular.module("formApp",['ui.select2'])
 formApp.controller "FormCtrl", ($scope) ->
   #$scope.journal = gon.journal

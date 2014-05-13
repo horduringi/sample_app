@@ -6,7 +6,7 @@
     <div class="row-fluid">
       <div class="span6" align="center">
         <h2 style="text-align:center">Select an ALiCCS-study number</h2>
-        <input align="center" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText" style="width:200px;"/>
+        <input align="center" placeholder="Search..." ng-model="filterOptions.filterText" style="width:200px;"/>
         <div class="gridStyle" ng-grid="gridOptions"></div>
         Total: {{myDataNotDone.length}}
         <% if current_user.admin %>
@@ -40,7 +40,7 @@
       </div>
       <div class="span6" align="center">
         <h2 style="text-align:center">Done</h2>
-        <input align="center" placeholder="Search..." ng-model="gridOptionsDone.filterOptions.filterText" style="width:200px;"/>
+        <input align="center" placeholder="Search..." ng-model="filterOptionsDone.filterText" style="width:200px;"/>
         <div class="gridStyle" ng-grid="gridOptionsDone"></div>
         Total: {{myDataDone.length}}
         <% if current_user.admin %>

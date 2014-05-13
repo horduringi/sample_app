@@ -9,6 +9,7 @@ myApp.controller "MyCtrl", ($scope) ->
       y = b[key]
       (if (x < y) then -1 else ((if (x > y) then 1 else 0)))
   $scope.filterOptions = filterText: ''
+  $scope.filterOptionsDone = filterText: ''
   $scope.myData = sortByKey(JSON.parse($.ajax(
     type: "GET"
     dataType: "json"
@@ -25,5 +26,6 @@ myApp.controller "MyCtrl", ($scope) ->
     columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="patients/{{row.getProperty(\'id\')}}/edit">{{row.getProperty(col.field)}}</a></span></div>'}]
   $scope.gridOptionsDone = 
     data: "myDataDone"
-    filterOptions: $scope.filterOptions
-    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number"}]
+    filterOptions: $scope.filterOptionsDone
+    columnDefs: [{field: "studynumber", displayName: "ALiCCS study number", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><a href="patients/{{row.getProperty(\'id\')}}/edit">{{row.getProperty(col.field)}}</a></span></div>'}]
+
