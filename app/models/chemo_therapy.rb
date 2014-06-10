@@ -14,7 +14,7 @@ class ChemoTherapy < ActiveRecord::Base
         "weight", "height", "estimated"]
       csv << column_names
       all.each do |chemo_therapies|
-        csv << chemo_therapies.attributes.values_at(*columns)
+        csv << chemo_therapies.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
       end
     end
   end

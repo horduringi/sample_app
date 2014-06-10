@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211220033) do
+ActiveRecord::Schema.define(:version => 20140609094537) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",              :default => "", :null => false
@@ -561,6 +561,7 @@ ActiveRecord::Schema.define(:version => 20131211220033) do
     t.integer  "lastdoctorsvisit_day"
     t.integer  "lastdoctorsvisit_month"
     t.integer  "lastdoctorsvisit_year"
+    t.integer  "entry_user_id"
   end
 
   add_index "patients", ["gender_id"], :name => "index_patients_on_gender_id"

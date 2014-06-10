@@ -2,8 +2,8 @@ class Patient < ActiveRecord::Base
   belongs_to :user
   belongs_to :gender
   has_many :journals, dependent: :destroy
-  attr_accessible *Patient.column_names, :cancerinfamily, :cancerinfamilyspec, :carcinomaslaterality, :carcinomasmetastasisatdiagnosis, :carcinomastumortype, :carcinomastumortypeotherspec, :chromosomaldisorder, :chromosomaldisorderspec, :chronicdisease, :chronicdiseasespec, :cnstumorhistologicaltype, :cnstumorlaterality, :cnstumorprimarytumorsite, :cnstumorprimarytumorsiteotherspec, :comments, :congenitalanomaly, :country, :datecreate, :dateofdiagnosis, :firstprimcancerdiagnosis, :firstprimcancertype, :germcelltumorsandgonadalstumorslaterality, :germcelltumorsandgonadalstumorsmetastasisatdiagnosis, :germcelltumorsandgonadalstumorstype, :hepatictumortype, :hodgkinlymphomasubtype, :immunedeficiency, :lastdoctorsvisit, :lastdoctorsvisitstatus, :leukemiasubtype, :malignantbonetumorlaterality, :malignantbonetumormetastasisatdiagnosis, :malignantbonetumorprimarytumorsite, :malignantbonetumorprimarytumorsiteotherspec, :malignantbonetumortype, :missinginfochemo, :missinginforadio, :missinginforadio, :missinginfosurgery, :neuroblastomalaterality, :neuroblastomametastasisatdiagnosis, :neuroblastomaprimarytumorsite, :neurofibromatosis, :nonhodgkinlymphomasubtype, :otherfamilialcancersyndspec, :otherprimarytumorsite, :otherprimarytumorsiteotherspec, :othertumortype, :othertumortypeotherspec, :permanentcomplicationsspec, :prevradtherapy, :prevradtherapy, :prevsurgicalprocedures, :prevsurgicalproceduresspec, :radiorecordscopied, :remissionstatus, :renaltumorlaterality, :renaltumormetastasisatdiagnosis, :renaltumortype, :renaltumortypeotherspec, :retinoblastomalaterality, :softtissuesarcomaslaterality, :softtissuesarcomasmetastasisatdiagnosis, :softtissuesarcomasprimarytumorsite, :softtissuesarcomasprimarytumorsiteotherspec, :softtissuesarcomastumortype, :softtissuesarcomastumortypeotherspec
-  validates_presence_of :gender_id, :missinginfochemo, :missinginforadio, :missinginfosurgery, :radiorecordscopied_day, :radiorecordscopied_month, :radiorecordscopied_year, :dateofextraction, :chronicdisease, :chromosomaldisorder, :immunedeficiency, :congenitalanomaly, :neurofibromatosis, :otherfamilialcancersynd, :cancerinfamily, :prevsurgicalprocedures, :prevradtherapy, :dateofdiagnosis_day, :dateofdiagnosis_month, :dateofdiagnosis_year, :firstprimcancertype, :on => :update
+  attr_accessible *Patient.column_names, :cancerinfamily, :cancerinfamilyspec, :carcinomaslaterality, :carcinomasmetastasisatdiagnosis, :carcinomastumortype, :carcinomastumortypeotherspec, :chromosomaldisorder, :chromosomaldisorderspec, :chronicdisease, :chronicdiseasespec, :cnstumorhistologicaltype, :cnstumorlaterality, :cnstumorprimarytumorsite, :cnstumorprimarytumorsiteotherspec, :comments, :congenitalanomaly, :country, :datecreate, :dateofdiagnosis, :firstprimcancerdiagnosis, :firstprimcancertype, :germcelltumorsandgonadalstumorslaterality, :germcelltumorsandgonadalstumorsmetastasisatdiagnosis, :germcelltumorsandgonadalstumorstype, :hepatictumortype, :hodgkinlymphomasubtype, :immunedeficiency, :lastdoctorsvisit, :lastdoctorsvisitstatus, :leukemiasubtype, :malignantbonetumorlaterality, :malignantbonetumormetastasisatdiagnosis, :malignantbonetumorprimarytumorsite, :malignantbonetumorprimarytumorsiteotherspec, :malignantbonetumortype, :missinginfochemo, :missinginforadio, :missinginforadio, :missinginfosurgery, :neuroblastomalaterality, :neuroblastomametastasisatdiagnosis, :neuroblastomaprimarytumorsite, :neurofibromatosis, :nonhodgkinlymphomasubtype, :otherfamilialcancersyndspec, :otherprimarytumorsite, :otherprimarytumorsiteotherspec, :othertumortype, :othertumortypeotherspec, :permanentcomplicationsspec, :prevradtherapy, :prevradtherapy, :prevsurgicalprocedures, :prevsurgicalproceduresspec, :radiorecordscopied, :remissionstatus, :renaltumorlaterality, :renaltumormetastasisatdiagnosis, :renaltumortype, :renaltumortypeotherspec, :retinoblastomalaterality, :softtissuesarcomaslaterality, :softtissuesarcomasmetastasisatdiagnosis, :softtissuesarcomasprimarytumorsite, :softtissuesarcomasprimarytumorsiteotherspec, :softtissuesarcomastumortype, :softtissuesarcomastumortypeotherspec, :entry_user_id
+  validates_presence_of :gender_id, :missinginfochemo, :missinginforadio, :missinginfosurgery, :dateofextraction, :chronicdisease, :chromosomaldisorder, :immunedeficiency, :congenitalanomaly, :neurofibromatosis, :otherfamilialcancersynd, :cancerinfamily, :prevsurgicalprocedures, :prevradtherapy, :dateofdiagnosis_day, :dateofdiagnosis_month, :dateofdiagnosis_year, :firstprimcancertype, :entry_user_id, :on => :update
   validates_presence_of :leukemiasubtype, :if => :first_leukemia?
   validates_presence_of :hodgkinlymphomasubtype, :if => :first_hodgkinlymphomasubtype?
   validates_presence_of :nonhodgkinlymphomasubtype, :if => :first_nonhodgkinlymphomasubtype?
@@ -18,9 +18,9 @@ class Patient < ActiveRecord::Base
   validates_presence_of :germcelltumorsandgonadalstumorstype, :germcelltumorsandgonadaltumorslaterality, :germcellandgonadalstumorsmetastasisatdiagnosis, :if => :first_germcelltumorsandgonadalstumorstype?
   validates_presence_of :othertumortype, :otherprimarytumorsite, :if => :first_othertumortype?
 
-  validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :lastdoctorsvisit_day, :in => Array(1..31) + [99] + [nil]
-  validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :lastdoctorsvisit_month, :in => Array(1..12) + [99] + [nil]
-  validates_inclusion_of :radiorecordscopied_year, :lastdoctorsvisit_year, :in => Array(1970..2100) + [99] + [nil]
+  #validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :lastdoctorsvisit_day, :in => Array(1..31) + [99] + [nil]
+  #validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :lastdoctorsvisit_month, :in => Array(1..12) + [99] + [nil]
+  #validates_inclusion_of :radiorecordscopied_year, :lastdoctorsvisit_year, :in => Array(1970..2100) + [99] + [nil]
   validates_inclusion_of :dateofdiagnosis_year, :in => Array(1970..2005) + [99] + [nil]
 
   validates_presence_of :lastdoctorsvisit_day, :lastdoctorsvisit_month, :lastdoctorsvisit_year, :lastdoctorsvisitstatus, :if => :is_done?
@@ -72,8 +72,8 @@ class Patient < ActiveRecord::Base
     CSV.generate(options) do |csv|
       columns = ["id", "country", "studynumber", "gender_id", "comments",
                  "missinginfochemo", "missinginforadio", "missinginfosurgery",
-                 "radiorecordscopied_day", "radiorecordscopied_month", "radiorecordscopied_year",
-                 "user_id", "dateofextraction", "chronicdisease", "chronicdiseasespec",
+                 #"radiorecordscopied_day", "radiorecordscopied_month", "radiorecordscopied_year",
+                 "entry_user_id", "user_id", "dateofextraction", "chronicdisease", "chronicdiseasespec",
                  "chromosomaldisorder", "chromosomaldisorderspec", "immunedeficiency",
                  "congenitalanomaly", "neurofibromatosis", "otherfamilialcancersynd",
                  "otherfamilialcancersyndspec", "cancerinfamily", "cancerinfamilyspec",
@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
                ]
       csv << columns
       all.each do |patient|
-        csv << patient.attributes.values_at(*columns)
+        csv << patient.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
       end
     end
   end

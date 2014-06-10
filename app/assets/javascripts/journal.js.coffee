@@ -43,9 +43,9 @@ $(document).ready ->
   $("#journal_internalradiotherapy").change ->
     hide_and_seek("#journal_internalradiotherapy", "#internalradiotherapy_show", "1")
 
-  hide_and_seek("#journal_internalradiotherapy", "#internalradiotherapy_show", "1")
-  $("#journal_internalradiotherapy").change ->
-    hide_and_seek("#journal_internalradiotherapy", "#internalradiotherapy_show", "1")
+  hide_and_seek("#journal_chemotherapyCVC", "#chemotherapyCVC_show", "1")
+  $("#journal_chemotherapyCVC").change ->
+    hide_and_seek("#journal_chemotherapyCVC", "#chemotherapyCVC_show", "1")
 
 hide_and_seek = (master, slave, show_value) ->
   selected = $(master + " option:selected")

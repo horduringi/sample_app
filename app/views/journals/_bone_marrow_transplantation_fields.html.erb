@@ -9,13 +9,17 @@
       <%= f.number_field :transplantationdate_month, {placeholder: "month", :class => "date_generic"} %>
       <%= f.number_field :transplantationdate_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
+    <div class="span3">
+      <p class="infoSmall">99 = not known</p>
+    </div>
   </div>
   <div class="row-fluid">
     <div class="span3">
       <p>Autologous</p>
     </div>
     <div class="span2">
-      <%= f.select :autologous, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, ), :include_blank => true %> 
+      <%= f.collection_select(:autologous, NoYes.all, :seq, :noyes_combo, {include_blank: true}) %>
+      <!--%= f.select :autologous, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo, ), :include_blank => true %--> 
     </div>
   </div>
   <div class="row-fluid">
@@ -23,7 +27,8 @@
       <p>Allogeneic</p>
     </div>
     <div class="span2">
-      <%= f.select :allogeneic, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
+      <%= f.collection_select(:allogeneic, NoYes.all, :seq, :noyes_combo, {include_blank: true}) %>
+      <!--%= f.select :allogeneic, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %--> 
     </div>
   </div>
   <div class="row-fluid">
@@ -31,7 +36,8 @@
       <p>Donor</p>
     </div>
     <div class="span2">
-      <%= f.select :donor, options_from_collection_for_select(Donor.all, :seq,:donor_combo), :include_blank => true %> 
+      <%= f.collection_select(:donor, Donor.all, :seq, :donor_combo, {include_blank: true}) %>
+      <!--%= f.select :donor, options_from_collection_for_select(Donor.all, :seq,:donor_combo), :include_blank => true %--> 
     </div>
   </div>  
   <div class="row-fluid">
@@ -39,7 +45,8 @@
       <p>Source</p>
     </div>
     <div class="span2">
-      <%= f.select :source, options_from_collection_for_select(Source.all, :seq,:source_combo), :include_blank => true %> 
+      <%= f.collection_select(:source, Source.all, :seq, :source_combo, {include_blank: true}) %>
+      <!--%= f.select :source, options_from_collection_for_select(Source.all, :seq,:source_combo), :include_blank => true %--> 
     </div>
   </div>
   <div class="row-fluid">
@@ -55,10 +62,11 @@
       <p>Total body irradiation (TBI):</p>
     </div>
     <div class="span2">
-      <%= f.select :totalbodyirritation, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %> 
+      <%= f.collection_select(:totalbodyirritation, NoYes.all, :seq, :noyes_combo, {include_blank: true}) %>
+      <!--%= f.select :totalbodyirritation, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %--> 
     </div>
   </div>
-  <div class="row-fluid">
+  <!--div class="row-fluid">
     <div class="span3 offset1">
       <p>Date of start:</p>
     </div>
@@ -67,8 +75,8 @@
       <%= f.number_field :startdate_month, {placeholder: "month", :class => "date_generic"} %>
       <%= f.number_field :startdate_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
-  </div>
-  <div class="row-fluid">
+  </div-->
+  <!--div class="row-fluid">
     <div class="span3 offset1">
       <p>Date of completion:</p>
     </div>
@@ -77,22 +85,23 @@
       <%= f.number_field :completiondate_month, {placeholder: "month", :class => "date_generic"} %>
       <%= f.number_field :completiondate_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
-  </div>
-  <div class="row-fluid">
+  </div-->
+  <!--div class="row-fluid">
     <div class="span3 offset1">
       <p>Radiotherapy records copied:</p>
     </div>
     <div class="span2">
       <%= f.select :radiotherapyrecordscopied, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %>
     </div>
-  </div>
+  </div-->
   <br>
   <div class="row-fluid">
     <div class="span3 offset1">
       <b>Chemotherapy (conditioning)</b>
     </div>
     <div class="span2">
-      <%= f.select :chemotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %>
+      <%= f.collection_select(:chemotherapy, NoYes.all, :seq, :noyes_combo, {include_blank: true}) %>
+      <!--%= f.select :chemotherapy, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), :include_blank => true %-->
     </div>
   </div>
   <div class="row-fluid">
@@ -107,6 +116,9 @@
       <%= f.number_field :chemotherapydateofinitiation_month, {placeholder: "month", :class => "date_generic"} %>
       <%= f.number_field :chemotherapydateofinitiation_year, {placeholder: "year", :class => "date_generic"} %>
     </div>
+    <div class="span3 offset4">
+      <p class="infoSmall">99 = not known</p>
+    </div>
   </div>
   <div class="row-fluid">
     <div class="span3 offset1">
@@ -116,6 +128,9 @@
       <%= f.number_field :chemotherapydateofcompletion_day, {placeholder: "day", :class => "date_generic"} %>
       <%= f.number_field :chemotherapydateofcompletion_month, {placeholder: "month", :class => "date_generic"} %>
       <%= f.number_field :chemotherapydateofcompletion_year, {placeholder: "year", :class => "date_generic"} %>
+    </div>
+    <div class="span3 offset4">
+      <p class="infoSmall">99 = not known</p>
     </div>
   </div>
   <div class="row-fluid">
@@ -168,7 +183,8 @@
     <strong>Were cardioprotectants used?</strong>&nbsp;(Cardioprotectants: Cardioxane, Zinecard or DexrazOxane)
     <br>
     <span class="span2">
-    <%= f.select :cardioprotectants, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), include_blank: true %>
+    <%= f.collection_select(:cardioprotectants, NoYes.all, :seq, :noyes_combo, {include_blank: true}) %>
+    <!--%= f.select :cardioprotectants, options_from_collection_for_select(NoYes.all, :seq,:noyes_combo), include_blank: true %-->
   </span>
   
 <br><br></p>

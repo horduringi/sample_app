@@ -20,7 +20,7 @@ class CytostaticDrugGiven < ActiveRecord::Base
         "anthracyclinesbolusinf", "chemoorbonemarrow"]
       csv << column_names
       all.each do |cytostatic_drug_given|
-        csv << cytostatic_drug_given.attributes.values_at(*columns)
+        csv << cytostatic_drug_given.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
       end
     end
   end

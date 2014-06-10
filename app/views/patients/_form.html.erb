@@ -30,6 +30,9 @@
     <div class="span2">
         <%= @patient.studynumber %>
     </div>
+    <div class="span7 offset3">
+        <p class="infoSmall">* Except in Sweden: S-no.</p>
+    </div>
   </div>
   <br>
   <div class="row-fluid">
@@ -76,7 +79,7 @@
     </div>
   </div>
   <br>
-  <div class="row-fluid">
+  <!--div class="row-fluid">
     <div class="span3">
         <p>Radiotherapy records copied**:</p>
     </div>
@@ -88,14 +91,24 @@
     <div class="span7 offset3">
         <p class="infoSmall">**copied WITHOUT any personal identifications. Leave empty if not relevant.</p>
     </div>
+  </div-->
+  <br>
+  <div class="row-fluid">
+    <div class="span3">
+      <p>Data entry accomplished by:</p>
+    </div>
+    <div class="span5">
+      <%= j.select :entry_user_id, options_from_collection_for_select(User.all, :id, :name, @patient.entry_user_id), {include_blank: true}, {} %>
+      <!--%= @patient.user.name + " at " + Institute.find(@patient.user.institute_id).name %-->
+    </div>
   </div>
   <br>
   <div class="row-fluid">
     <div class="span3">
       <p>Data extraction accomplished by:</p>
     </div>
-    <div class="span8">
-      <%= @patient.user.name + " at " + Institute.find(@patient.user.institute_id).name %>
+    <div class="span5">
+      <%= j.select :user_id, options_from_collection_for_select(User.all, :id, :name, @patient.user_id), {include_blank: true}, {} %>
     </div>
   </div>
   <br>

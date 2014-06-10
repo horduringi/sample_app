@@ -1,9 +1,20 @@
 <fieldset>
   <tr>  
-    <td style="position:relative;left:20px;width:260px"><%= f.select :cytostaticdrugid, options_from_collection_for_select(CytostaticDrug.all, :number,:cytostatic_drug_combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true} %> </td>
-    <td align="center" style="position:relative;left:19px;width:230px"><%= f.number_field :totalcumulateddosemg, step: 0.01, min: 0, style: 'width:200px;' %></td>
-    <td align="center" style="position:relative;left:18px"><%= f.select :dosequality, options_from_collection_for_select(DoseQuality.all, :id,:dose_quality_combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 110px', 'select2-container' => true} %></td>
-    <td align="center" style="position:relative;left:17px"><%= f.select :anthracyclinesbolusinf, options_from_collection_for_select(AnthracyclinesBolusInf.all, :seq,:combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true} %></td>
+    <td style="position:relative;left:20px;width:260px">
+      <%= f.collection_select(:cytostaticdrugid, CytostaticDrug.all, :number, :cytostatic_drug_combo, {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true}) %>
+      <!--%= f.select :cytostaticdrugid, options_from_collection_for_select(CytostaticDrug.all, :number,:cytostatic_drug_combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true} %-->
+    </td>
+    <td align="center" style="position:relative;left:19px;width:230px">
+      <%= f.number_field :totalcumulateddosemg, step: 0.01, min: 0, style: 'width:200px;' %>
+    </td>
+    <td align="center" style="position:relative;left:18px">
+      <%= f.collection_select(:dosequality, DoseQuality.all, :id, :dose_quality_combo, {:include_blank => true}, {"ui-select2" => :true, style: 'width: 110px', 'select2-container' => true}) %>
+      <!--%= f.select :dosequality, options_from_collection_for_select(DoseQuality.all, :id,:dose_quality_combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 110px', 'select2-container' => true} %-->
+    </td>
+    <td align="center" style="position:relative;left:17px">
+      <%= f.collection_select(:anthracyclinesbolusinf, AnthracyclinesBolusInf.all, :seq, :combo, {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true}) %>
+      <!--%= f.select :anthracyclinesbolusinf, options_from_collection_for_select(AnthracyclinesBolusInf.all, :seq,:combo), {:include_blank => true}, {"ui-select2" => :true, style: 'width: 260px', 'select2-container' => true} %-->
+    </td>
     <td style='position:relative;left:16px;width:100px'>
       <%= f.hidden_field :chemoorbonemarrow, value: 2 %>
       <%= f.hidden_field :_destroy %>

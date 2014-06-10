@@ -6,7 +6,7 @@ class BoneMarrowTransplantation < ActiveRecord::Base
   accepts_nested_attributes_for :cytostatic_drug_given, allow_destroy: true
   accepts_nested_attributes_for :cytostatic_drug_given_bone_marrow, allow_destroy: true
 
-  validates_presence_of :transplantationdate_day, :transplantationdate_month, :transplantationdate_year, :autologous, :allogeneic, :donor, :source, :totalbodyirritation, :startdate_day, :startdate_month, :startdate_year, :completiondate_day, :completiondate_month, :completiondate_year, :radiotherapyrecordscopied, :chemotherapy
+  validates_presence_of :transplantationdate_day, :transplantationdate_month, :transplantationdate_year, :autologous, :allogeneic, :donor, :source, :totalbodyirritation,  :chemotherapy
   validates_presence_of :chemotherapydateofinitiation_day, :chemotherapydateofinitiation_month, :chemotherapydateofinitiation_year, :chemotherapydateofcompletion_day, :chemotherapydateofcompletion_month, :chemotherapydateofcompletion_year, :bodysurfaceconditioning, :weightconditioning, :heightconditioning, :if => :chemo_therapy?
 
   validates_inclusion_of :transplantationdate_day, :startdate_day, :completiondate_day, :chemotherapydateofinitiation_day, :chemotherapydateofcompletion_day, :in => Array(1..31) + [99] + [nil]
@@ -19,15 +19,16 @@ class BoneMarrowTransplantation < ActiveRecord::Base
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       columns = ["id", "journal_id", "transplantationdate_day", "transplantationdate_month", "transplantationdate_year",
-        "autologous", "allogeneic", "donor", "source", "totalbodyirritation", "startdate_day", "startdate_month", "startdate_year",
-        "completiondate_day", "completiondate_month", "completiondate_year", "radiotherapyrecordscopied", "chemotherapy",
+        "autologous", "allogeneic", "donor", "source", "totalbodyirritation", #"startdate_day", "startdate_month", "startdate_year",
+        #"completiondate_day", "completiondate_month", "completiondate_year", "radiotherapyrecordscopied",
+        "chemotherapy",
         "chemotherapydateofinitiation_day", "chemotherapydateofinitiation_month", "chemotherapydateofinitiation_year", 
         "chemotherapydateofcompletion_day", "chemotherapydateofcompletion_month", "chemotherapydateofcompletion_year",
         "bodysurfaceconditioning", "weightconditioning", "heightconditioning", "cardioprotectants", "treatmentprotocol"
       ]
       csv << column_names
       all.each do |bone_marrow_transplantation|
-        csv << bone_marrow_transplantation.attributes.values_at(*columns)
+        csv << bone_marrow_transplantation.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
       end
     end
   end

@@ -21,9 +21,9 @@ class Journal < ActiveRecord::Base
   validates_inclusion_of :relapse_date_year, :externalbeamradiotherapydateofstart_year, :externalbeamradiotherapydateofcompletion_year, :externalbeamradiotherapyrecordscopied_year, :brachytherapydateofstart_year, :brachytherapydateofcompletion_year, :brachytherapyrecordscopied_year, :internalradiotherapydateofstart_year, :internalradiotherapyrecordscopied_year, :chemotherapydateinitiation_year, :chemotherapydatecompletion_year, :chemotherapyinsertiondatecvc_year, :chemotherapypermanentremovaldate_year, :in => Array(1970..2100) + [99] + [nil]
 
   validates_presence_of :externalbeamradiotherapy, :brachytherapy, :internalradiotherapy, :if => :radio_therapy?
-  validates_presence_of :externalbeamradiotherapydateofstart_day, :externalbeamradiotherapydateofstart_month, :externalbeamradiotherapydateofstart_year, :externalbeamradiotherapydateofcompletion_day, :externalbeamradiotherapydateofcompletion_month, :externalbeamradiotherapydateofcompletion_year, :externalbeamradiotherapyrecordscopied_day, :externalbeamradiotherapyrecordscopied_month, :externalbeamradiotherapyrecordscopied_year, :if => :external_beam_radio_therapy?
-  validates_presence_of :brachytherapydateofstart_day, :brachytherapydateofstart_month, :brachytherapydateofstart_year, :brachytherapydateofcompletion_day, :brachytherapydateofcompletion_month, :brachytherapydateofcompletion_year, :brachytherapyrecordscopied_day, :brachytherapyrecordscopied_month, :brachytherapyrecordscopied_year, :if => :brachy_therapy?
-  validates_presence_of :internalradiotherapydateofstart_day, :internalradiotherapydateofstart_month, :internalradiotherapydateofstart_year, :internalradiotherapyrecordscopied_day, :internalradiotherapyrecordscopied_month, :internalradiotherapyrecordscopied_year, :if => :internal_radio_therapy?
+  #validates_presence_of :externalbeamradiotherapydateofstart_day, :externalbeamradiotherapydateofstart_month, :externalbeamradiotherapydateofstart_year, :externalbeamradiotherapydateofcompletion_day, :externalbeamradiotherapydateofcompletion_month, :externalbeamradiotherapydateofcompletion_year, :externalbeamradiotherapyrecordscopied_day, :externalbeamradiotherapyrecordscopied_month, :externalbeamradiotherapyrecordscopied_year, :if => :external_beam_radio_therapy?
+  #validates_presence_of :brachytherapydateofstart_day, :brachytherapydateofstart_month, :brachytherapydateofstart_year, :brachytherapydateofcompletion_day, :brachytherapydateofcompletion_month, :brachytherapydateofcompletion_year, :brachytherapyrecordscopied_day, :brachytherapyrecordscopied_month, :brachytherapyrecordscopied_year, :if => :brachy_therapy?
+  #validates_presence_of :internalradiotherapydateofstart_day, :internalradiotherapydateofstart_month, :internalradiotherapydateofstart_year, :internalradiotherapyrecordscopied_day, :internalradiotherapyrecordscopied_month, :internalradiotherapyrecordscopied_year, :if => :internal_radio_therapy?
 
   validates_presence_of :chemotherapydateinitiation_day, :chemotherapydateinitiation_month, :chemotherapydateinitiation_year, :chemotherapydatecompletion_day, :chemotherapydatecompletion_month, :chemotherapydatecompletion_year, :chemotherapybodysurfaceatdiagnosis, :chemotherapyweightatdiagnosis, :chemotherapyheightatdiagnosis, :chemocardioprotectants, :chemotherapyestimated, :chemotherapyCVC, :if => :chemo_therapy?
   validates_presence_of :chemotherapyinsertiondatecvc_day, :chemotherapyinsertiondatecvc_month, :chemotherapyinsertiondatecvc_year, :chemotherapypermanentremovaldate_day, :chemotherapypermanentremovaldate_month, :chemotherapypermanentremovaldate_year, :if => :cvc_inserted?
@@ -54,18 +54,21 @@ class Journal < ActiveRecord::Base
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       columns = ["id", "patient_id", "relapse_date_day", "relapse_date_month", "relapse_date_year",
-                "radiotherapy", "externalbeamradiotherapy", "externalbeamradiotherapydateofstart_day",
-                "externalbeamradiotherapydateofstart_month", "externalbeamradiotherapydateofstart_year",
-                "externalbeamradiotherapydateofcompletion_day", "externalbeamradiotherapydateofcompletion_month",
-                "externalbeamradiotherapydateofcompletion_year", "externalbeamradiotherapytreatinghospital",
-                "externalbeamradiotherapyrecordscopied_day", "externalbeamradiotherapyrecordscopied_month",
-                "externalbeamradiotherapyrecordscopied_year", "brachytherapy", "brachytherapydateofstart_day",
-                "brachytherapydateofstart_month", "brachytherapydateofstart_year", "brachytherapydateofcompletion_day",
-                "brachytherapydateofcompletion_month", "brachytherapydateofcompletion_year", "brachytherapytreatinghospital",
-                "brachytherapyrecordscopied_day", "brachytherapyrecordscopied_month", "brachytherapyrecordscopied_year",
-                "internalradiotherapy", "internalradiotherapydateofstart_day", "internalradiotherapydateofstart_month",
-                "internalradiotherapydateofstart_year", "internalradiotherapytreatinghospital", "internalradiotherapyrecordscopied_day",
-                "internalradiotherapyrecordscopied_month", "internalradiotherapyrecordscopied_year", "surgery",
+                "radiotherapy", "externalbeamradiotherapy",
+                #"externalbeamradiotherapydateofstart_day",
+                #"externalbeamradiotherapydateofstart_month", "externalbeamradiotherapydateofstart_year",
+                #"externalbeamradiotherapydateofcompletion_day", "externalbeamradiotherapydateofcompletion_month",
+                #"externalbeamradiotherapydateofcompletion_year", "externalbeamradiotherapytreatinghospital",
+                #"externalbeamradiotherapyrecordscopied_day", "externalbeamradiotherapyrecordscopied_month",
+                #"externalbeamradiotherapyrecordscopied_year",
+                "brachytherapy", #"brachytherapydateofstart_day",
+                #"brachytherapydateofstart_month", "brachytherapydateofstart_year", "brachytherapydateofcompletion_day",
+                #"brachytherapydateofcompletion_month", "brachytherapydateofcompletion_year", "brachytherapytreatinghospital",
+                #"brachytherapyrecordscopied_day", "brachytherapyrecordscopied_month", "brachytherapyrecordscopied_year",
+                "internalradiotherapy", #"internalradiotherapydateofstart_day", "internalradiotherapydateofstart_month",
+                #"internalradiotherapydateofstart_year", "internalradiotherapytreatinghospital", "internalradiotherapyrecordscopied_day",
+                #"internalradiotherapyrecordscopied_month", "internalradiotherapyrecordscopied_year",
+                "surgery",
                 "chemotherapy", "chemotherapydateinitiation_day", "chemotherapydateinitiation_month", "chemotherapydateinitiation_year",
                 "chemotherapydatecompletion_day", "chemotherapydatecompletion_month", "chemotherapydatecompletion_year",
                 "chemotherapybodysurfaceatdiagnosis", "chemotherapyweightatdiagnosis", "chemotherapyheightatdiagnosis",
@@ -76,7 +79,7 @@ class Journal < ActiveRecord::Base
       ]
       csv << columns
       all.each do |journal|
-        csv << journal.attributes.values_at(*columns)
+        csv << journal.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
       end
     end
   end
