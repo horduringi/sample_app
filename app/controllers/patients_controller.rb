@@ -39,7 +39,7 @@ class PatientsController < ApplicationController
   # GET /patients/1/edit
   def edit
     @patient = Patient.find(params[:id])
-    @patient.user_id = current_user.id
+    #@patient.user_id = current_user.id
     #@patient.save
     gon.patient = @patient
   end
