@@ -75,6 +75,9 @@ $(document).ready ->
     hide_and_seek("#patient_otherprimarytumorsite", "#otherprimarytumorsiteotherspec", "9")
 
   $(".firstprimcancertypes").hide()
+  selected= $("#patient_firstprimcancertype option:selected").val()
+  $("#" + selected).show()
+  
   $("#patient_firstprimcancertype").change ->
     $(".firstprimcancertypes").hide()
     selected= $("#patient_firstprimcancertype option:selected").val()

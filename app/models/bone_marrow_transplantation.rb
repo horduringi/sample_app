@@ -9,12 +9,16 @@ class BoneMarrowTransplantation < ActiveRecord::Base
   validates_presence_of :transplantationdate_day, :transplantationdate_month, :transplantationdate_year, :autologous, :allogeneic, :donor, :source, :totalbodyirritation,  :chemotherapy
   validates_presence_of :chemotherapydateofinitiation_day, :chemotherapydateofinitiation_month, :chemotherapydateofinitiation_year, :chemotherapydateofcompletion_day, :chemotherapydateofcompletion_month, :chemotherapydateofcompletion_year, :bodysurfaceconditioning, :weightconditioning, :heightconditioning, :if => :chemo_therapy?
 
+
+
   validates_inclusion_of :transplantationdate_day, :startdate_day, :completiondate_day, :chemotherapydateofinitiation_day, :chemotherapydateofcompletion_day, :in => Array(1..31) + [99] + [nil]
   validates_inclusion_of :transplantationdate_month, :startdate_month, :completiondate_month, :chemotherapydateofinitiation_month, :chemotherapydateofcompletion_month, :in => Array(1..12) + [99] + [nil]
   validates_inclusion_of :transplantationdate_year, :startdate_year, :completiondate_year, :chemotherapydateofinitiation_year, :chemotherapydateofcompletion_year, :in => Array(1970..2100) + [99] + [nil]
 
+
+
   def chemo_therapy?
-    chemotherapy == 2
+    chemotherapy == 1
   end
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -28,7 +32,7 @@ class BoneMarrowTransplantation < ActiveRecord::Base
       ]
       csv << column_names
       all.each do |bone_marrow_transplantation|
-        csv << bone_marrow_transplantation.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
+        csv << bone_marrow_transplantation.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() else item end}
       end
     end
   end

@@ -20,7 +20,7 @@ class Surgery < ActiveRecord::Base
       ]
       csv << column_names
       all.each do |surgery|
-        csv << surgery.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
+        csv << surgery.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() else item end}
       end
     end
   end

@@ -79,7 +79,7 @@ class Journal < ActiveRecord::Base
       ]
       csv << columns
       all.each do |journal|
-        csv << journal.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
+        csv << journal.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() else item end}
       end
     end
   end

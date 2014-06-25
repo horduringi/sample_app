@@ -55,8 +55,8 @@ SampleApp::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :user_name            => '<username>',
-    :password             => '<password>',
+    :user_name            => 'aliccs.med',
+    :password             => '.Sumar2014',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 

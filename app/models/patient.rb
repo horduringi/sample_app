@@ -18,10 +18,10 @@ class Patient < ActiveRecord::Base
   validates_presence_of :germcelltumorsandgonadalstumorstype, :germcelltumorsandgonadaltumorslaterality, :germcellandgonadalstumorsmetastasisatdiagnosis, :if => :first_germcelltumorsandgonadalstumorstype?
   validates_presence_of :othertumortype, :otherprimarytumorsite, :if => :first_othertumortype?
 
-  #validates_inclusion_of :radiorecordscopied_day, :dateofdiagnosis_day, :lastdoctorsvisit_day, :in => Array(1..31) + [99] + [nil]
-  #validates_inclusion_of :radiorecordscopied_month, :dateofdiagnosis_month, :lastdoctorsvisit_month, :in => Array(1..12) + [99] + [nil]
-  #validates_inclusion_of :radiorecordscopied_year, :lastdoctorsvisit_year, :in => Array(1970..2100) + [99] + [nil]
-  validates_inclusion_of :dateofdiagnosis_year, :in => Array(1970..2005) + [99] + [nil]
+  validates_inclusion_of :dateofdiagnosis_day, :lastdoctorsvisit_day, :in => Array(1..31) + [99] + [nil]
+  validates_inclusion_of :dateofdiagnosis_month, :lastdoctorsvisit_month, :in => Array(1..12) + [99] + [nil]
+  validates_inclusion_of :lastdoctorsvisit_year, :in => Array(1970..2100) + [99] + [nil]
+  validates_inclusion_of :dateofdiagnosis_year, :in => Array(1970..2013) + [99] + [nil]
 
   validates_presence_of :lastdoctorsvisit_day, :lastdoctorsvisit_month, :lastdoctorsvisit_year, :lastdoctorsvisitstatus, :if => :is_done?
 
@@ -72,7 +72,6 @@ class Patient < ActiveRecord::Base
     CSV.generate(options) do |csv|
       columns = ["id", "country", "studynumber", "gender_id", "comments",
                  "missinginfochemo", "missinginforadio", "missinginfosurgery",
-                 #"radiorecordscopied_day", "radiorecordscopied_month", "radiorecordscopied_year",
                  "entry_user_id", "user_id", "dateofextraction", "chronicdisease", "chronicdiseasespec",
                  "chromosomaldisorder", "chromosomaldisorderspec", "immunedeficiency",
                  "congenitalanomaly", "neurofibromatosis", "otherfamilialcancersynd",
@@ -99,7 +98,7 @@ class Patient < ActiveRecord::Base
                ]
       csv << columns
       all.each do |patient|
-        csv << patient.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() end}
+        csv << patient.attributes.values_at(*columns).collect{|item| if item.class == String then item.squish() else item end}
       end
     end
   end
