@@ -72,7 +72,9 @@ class CytostaticDrug < ActiveHash::Base
     {id: 70, number: 511, name: "Prednison/Deltison"},
     {id: 71, number: 521, name: "Prednisolon"},
     {id: 72, number: 530, name: "Betapred/Betametazon"},
-    {id: 73, number: 541, name: "Dekadron/Dexametazon"}
+    {id: 73, number: 541, name: "Dekadron/Dexametazon"},
+    {id: 74, number: 441, name: "Avastin/Bevacizumab"}
+
   ]
   def cytostatic_drug_combo
     "#{self.number} - #{self.name}"
