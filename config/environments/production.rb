@@ -53,11 +53,9 @@ SampleApp::Application.configure do
   Rails.application.routes.default_url_options[:host] = 'medicalabstraction.aliccs.org'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => 'aliccs.med',
-    :password             => '.Sumar2014',
-    :authentication       => 'plain',
+    :address              => "relay.cancer.dk",
+    :port                 => 25,
+    :user_name            => 'noreply',
     :enable_starttls_auto => true  }
 
   # Enable threaded mode
