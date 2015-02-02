@@ -47,7 +47,7 @@ class CytostaticDrug < ActiveHash::Base
     {id: 45, number: 409, name: "Hexametylmelamin"},
     {id: 46, number: 410, name: "Metyl-GAG"},
     {id: 47, number: 430, name: "Interferon-alfa"},
-    {id: 48, number: 431, name: "PEG-Interferon"},
+    {id: 48, number: 431, name: "PEG-Interferon-alfa"},
     {id: 49, number: 440, name: "Mabthera/Retuximab"},
     {id: 50, number: 445, name: "Enbrel/TNF-blockare"},
     {id: 51, number: 460, name: "Velbre/Vinblastin"},
@@ -73,7 +73,9 @@ class CytostaticDrug < ActiveHash::Base
     {id: 71, number: 521, name: "Prednisolon"},
     {id: 72, number: 530, name: "Betapred/Betametazon"},
     {id: 73, number: 541, name: "Dekadron/Dexametazon"},
-    {id: 74, number: 441, name: "Avastin/Bevacizumab"}
+    {id: 74, number: 441, name: "Avastin/Bevacizumab"},
+    {id: 75, number: 432, name: "PEG-Interferon-beta"},
+    {id: 76, number: 420, name: "Interferon-beta"}
 
   ]
   def cytostatic_drug_combo
